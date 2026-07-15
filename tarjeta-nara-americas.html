@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>NARA Américas — Tarjeta de Asesor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --navy:#0A1F44;
+    --navy-deep:#071731;
+    --gold:#C49A28;
+    --off:#F4F5F7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: Calibri, Arial, sans-serif; background:var(--off); margin:0; padding:30px;
+  }
+  .toolbar{
+    max-width:700px; margin:0 auto 20px; background:#fff; border-radius:10px; padding:16px 20px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.08); display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;
+  }
+  .toolbar div{ flex:1; min-width:160px;}
+  .toolbar label{ font-size:11px; font-weight:bold; color:var(--navy); display:block; margin-bottom:4px; text-transform:uppercase;}
+  .toolbar input{ width:100%; padding:8px 10px; border:1px solid #D7DCE3; border-radius:6px; font-family:inherit; font-size:14px;}
+  .toolbar button{
+    background:var(--gold); color:var(--navy-deep); border:none; padding:10px 18px; border-radius:6px;
+    font-weight:bold; cursor:pointer; font-size:13px;
+  }
+
+  .stage{ max-width:700px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:20px;}
+
+  .card{
+    width:336px; height:192px; border-radius:14px; position:relative; overflow:hidden;
+    box-shadow:0 8px 24px rgba(10,31,68,0.18);
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff; padding:22px 24px;
+  }
+  .card .circle{
+    position:absolute; border-radius:50%; background:rgba(255,255,255,0.05);
+  }
+  .card .c1{ width:160px; height:160px; top:-60px; right:-50px;}
+  .card .c2{ width:100px; height:100px; bottom:-40px; left:-30px;}
+  .card .brand{ font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:bold; position:relative; z-index:2;}
+  .card .name{ font-size:20px; font-weight:bold; margin-top:34px; position:relative; z-index:2;}
+  .card .role{ font-size:11px; color:#B8C4D6; margin-top:2px; position:relative; z-index:2;}
+  .card .divider{ width:34px; height:2px; background:var(--gold); margin:14px 0 12px; position:relative; z-index:2;}
+  .card .contact{ font-size:11px; color:#fff; line-height:1.6; position:relative; z-index:2;}
+  .card .contact b{ color:var(--gold);}
+
+  .card.back{
+    background:var(--off); color:var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(10,31,68,0.10);
+  }
+  .card.back .brand{ font-size:13px; letter-spacing:4px; color:var(--gold); font-weight:bold; margin-bottom:6px;}
+  .card.back .tag{ font-size:12px; color:#555;}
+
+  @media print{
+    .toolbar{ display:none; }
+    body{ padding:0; background:#fff; }
+    .stage{ flex-direction:row; gap:14px; }
+    .card{ box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div>
+      <label>Nombre del asesor</label>
+      <input id="inName" placeholder="Nombre completo" value="Nombre del Asesor">
+    </div>
+    <div>
+      <label>Teléfono</label>
+      <input id="inPhone" placeholder="33 0000 0000" value="33 0000 0000">
+    </div>
+    <button onclick="update()">Actualizar</button>
+    <button onclick="window.print()">Imprimir / PDF</button>
+  </div>
+
+  <div class="stage">
+    <div class="card">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+      <div class="brand">NARA AMÉRICAS</div>
+      <div class="name" id="cardName">Nombre del Asesor</div>
+      <div class="role">Asesor inmobiliario acreditado</div>
+      <div class="divider"></div>
+      <div class="contact">
+        <b>Tel.</b> <span id="cardPhone">33 0000 0000</span><br>
+        <b>Desarrollo</b> Av. Américas, Guadalajara, Jal.
+      </div>
+    </div>
+
+    <div class="card back">
+      <div class="brand">NARA AMÉRICAS</div>
+      <div class="tag">Av. Américas · Guadalajara, Jalisco</div>
+    </div>
+  </div>
+
+<script>
+function update(){
+  document.getElementById('cardName').textContent = document.getElementById('inName').value || 'Nombre del Asesor';
+  document.getElementById('cardPhone').textContent = document.getElementById('inPhone').value || '33 0000 0000';
+}
+document.getElementById('inName').addEventListener('input', update);
+document.getElementById('inPhone').addEventListener('input', update);
+</script>
+
+</body>
+</html>

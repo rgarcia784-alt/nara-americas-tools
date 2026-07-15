@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>NARA Américas — Portal de Asesores</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --navy:#0A1F44;
+    --navy-deep:#071731;
+    --bluegray:#3E5C76;
+    --bluegray-lt:#748CAB;
+    --gold:#C49A28;
+    --off:#F4F5F7;
+    --ink:#1B1F27;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:Calibri, Arial, sans-serif; background:var(--off); color:var(--ink);}
+
+  .hero{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff; padding:60px 24px 70px; text-align:center; position:relative; overflow:hidden;
+  }
+  .hero .brand{ letter-spacing:4px; font-size:13px; color:var(--gold); font-weight:bold;}
+  .hero h1{ font-size:34px; margin:10px 0 6px;}
+  .hero p{ color:var(--bluegray-lt); font-size:16px; max-width:520px; margin:0 auto;}
+
+  .wrap{ max-width:1000px; margin:-40px auto 0; padding:0 20px 60px; position:relative; z-index:2;}
+
+  .card{
+    background:#fff; border-radius:12px; padding:26px; margin-bottom:20px;
+    box-shadow:0 4px 16px rgba(10,31,68,0.08);
+  }
+  .card h2{ color:var(--navy); font-size:20px; margin:0 0 12px;}
+  .card p{ color:#444; line-height:1.6; font-size:14px; margin:0 0 14px;}
+
+  .quote-link{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    background:var(--navy); color:#fff; border-radius:10px; padding:22px 26px;
+  }
+  .quote-link div h3{ margin:0 0 4px; font-size:18px;}
+  .quote-link div p{ margin:0; color:var(--bluegray-lt); font-size:13px;}
+  .btn{
+    background:var(--gold); color:var(--navy-deep); font-weight:bold; padding:12px 22px;
+    border-radius:6px; text-decoration:none; font-size:14px; white-space:nowrap;
+  }
+
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:720px){ .grid3{ grid-template-columns:1fr;} }
+  .mini{ background:var(--off); border-radius:10px; padding:18px;}
+  .mini .num{ width:34px; height:34px; border-radius:50%; background:var(--navy); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-weight:bold; margin-bottom:10px;}
+  .mini h4{ margin:0 0 6px; font-size:15px; color:var(--navy);}
+  .mini p{ margin:0; font-size:13px; color:#555;}
+
+  .incentive{
+    background:var(--navy); color:#fff; border-radius:12px; padding:26px; margin-bottom:20px;
+  }
+  .incentive .tag{ color:var(--gold); font-size:12px; letter-spacing:2px; font-weight:bold;}
+  .incentive h2{ margin:6px 0 4px; font-size:22px;}
+  .incentive p{ color:var(--bluegray-lt); margin:0 0 18px;}
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media (max-width:720px){ .steps{ grid-template-columns:1fr;} }
+  .steps .s{ background:var(--navy-deep); border-radius:8px; padding:16px;}
+  .steps .s .n{ width:28px; height:28px; border-radius:50%; background:var(--gold); color:var(--navy-deep);
+    display:flex; align-items:center; justify-content:center; font-weight:bold; margin-bottom:8px; font-size:13px;}
+  .steps .s h5{ margin:0 0 4px; font-size:14px;}
+  .steps .s p{ margin:0; font-size:12px; color:var(--bluegray-lt);}
+
+  .whatsapp{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .whatsapp .btn-outline{
+    border:2px solid var(--navy); color:var(--navy); padding:10px 20px; border-radius:6px;
+    text-decoration:none; font-weight:bold; font-size:14px;
+  }
+
+  footer{ text-align:center; padding:26px; color:var(--bluegray); font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="brand">NARA AMÉRICAS</div>
+  <h1>Portal de Asesores</h1>
+  <p>Todo lo que necesitas para vender NARA Américas: cotizador, incentivo y comunicación directa con el equipo.</p>
+</div>
+
+<div class="wrap">
+
+  <div class="quote-link card" style="padding:0; overflow:hidden;">
+    <div class="quote-link">
+      <div>
+        <h3>Cotizador en línea</h3>
+        <p>Selecciona unidad, ajusta la forma de pago y genera tu cotización al instante.</p>
+      </div>
+      <a class="btn" href="cotizador-nara-americas.html">Abrir cotizador →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Cómo funciona la red de asesores</h2>
+    <div class="grid3">
+      <div class="mini">
+        <div class="num">1</div>
+        <h4>Regístrate</h4>
+        <p>Completa tu registro como asesor acreditado de NARA Américas.</p>
+      </div>
+      <div class="mini">
+        <div class="num">2</div>
+        <h4>Cotiza y presenta</h4>
+        <p>Usa el cotizador para armar propuestas personalizadas a tus clientes.</p>
+      </div>
+      <div class="mini">
+        <div class="num">3</div>
+        <h4>Cierra y cobra</h4>
+        <p>3% de comisión por venta cerrada, pagado a través de Rafa García.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="incentive">
+    <div class="tag">INCENTIVO ASESORES</div>
+    <h2>Rifa Puerto Vallarta</h2>
+    <p>2 noches / 3 días para 2 personas — sorteo cada 20 asistentes a la presentación de sábados.</p>
+    <div class="steps">
+      <div class="s">
+        <div class="n">1</div>
+        <h5>Asiste al evento</h5>
+        <p>Sábados, 11:00 am — sesión de reclutamiento de asesores.</p>
+      </div>
+      <div class="s">
+        <div class="n">2</div>
+        <h5>Visita el depto muestra</h5>
+        <p>Recibe tu boleto de rifa al recorrer el departamento muestra.</p>
+      </div>
+      <div class="s">
+        <div class="n">3</div>
+        <h5>Espera el sorteo</h5>
+        <p>Se sortea el viaje cada 20 boletos acumulados.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Recursos y comunicación</h2>
+    <div class="whatsapp">
+      <p style="margin:0; max-width:480px;">Únete al grupo de WhatsApp de asesores NARA Américas para avisos de disponibilidad, apartados y fechas de eventos.</p>
+      <a class="btn-outline" href="#" onclick="alert('Solicita el enlace del grupo a Rafa García.'); return false;">Unirme al grupo</a>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <p style="margin:0;">También contamos con folder legal físico disponible en punto de venta y tarjetas de presentación para asesores acreditados.</p>
+  </div>
+
+</div>
+
+<footer>NARA Américas — Av. Américas, Guadalajara, Jalisco</footer>
+
+</body>
+</html>

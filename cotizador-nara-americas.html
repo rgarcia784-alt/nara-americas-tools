@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>NARA Américas — Cotizador</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --navy:#0A1F44;
+    --navy-deep:#071731;
+    --bluegray:#3E5C76;
+    --gold:#C49A28;
+    --off:#F4F5F7;
+    --ink:#1B1F27;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: Calibri, Arial, sans-serif;
+    margin:0; background:var(--off); color:var(--ink);
+  }
+  header{
+    background:var(--navy); color:#fff; padding:28px 24px; text-align:center;
+  }
+  header .brand{ letter-spacing:4px; font-size:14px; color:var(--gold); font-weight:bold;}
+  header h1{ margin:6px 0 2px; font-size:28px;}
+  header p{ margin:0; color:#B8C4D6; font-size:14px;}
+
+  .wrap{ max-width:1100px; margin:0 auto; padding:24px;}
+  .step{
+    background:#fff; border-radius:10px; padding:20px 24px; margin-bottom:20px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.06);
+  }
+  .step h2{ font-size:18px; color:var(--navy); margin:0 0 14px;}
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  @media (max-width:700px){ .grid2, .grid4{ grid-template-columns:1fr;} }
+
+  label{ font-size:12px; color:var(--bluegray); font-weight:bold; display:block; margin-bottom:4px;}
+  input, select{
+    width:100%; padding:9px 10px; border:1px solid #D7DCE3; border-radius:6px;
+    font-family:inherit; font-size:14px; background:#fff;
+  }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .filters button{
+    padding:8px 16px; border-radius:20px; border:1px solid #D7DCE3; background:#fff;
+    cursor:pointer; font-size:13px; color:var(--navy);
+  }
+  .filters button.active{ background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  table{ width:100%; border-collapse:collapse; font-size:13px;}
+  th{ text-align:left; padding:8px; color:var(--bluegray); border-bottom:2px solid #E4E7EC; font-size:11px; text-transform:uppercase;}
+  td{ padding:9px 8px; border-bottom:1px solid #EEF0F3;}
+  tr.unit-row{ cursor:pointer;}
+  tr.unit-row:hover{ background:#F8FAFC;}
+  tr.selected{ background:#EEF3FB;}
+  .status-disp{ color:#1D7A46; font-weight:bold;}
+  .status-apart{ color:#B15A00; font-weight:bold;}
+
+  .pay-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .pay-row label{ width:150px; margin:0; flex-shrink:0;}
+  .pay-row input[type=number]{ width:90px;}
+  .pay-amount{ margin-left:auto; font-weight:bold; color:var(--navy); min-width:130px; text-align:right;}
+  .pay-total{ display:flex; justify-content:space-between; font-weight:bold; margin-top:8px; padding-top:8px; border-top:1px solid #E4E7EC;}
+  .pay-total.err{ color:#C0392B;}
+  .pay-total.ok{ color:#1D7A46;}
+
+  #quote{ display:none; }
+  #quote.show{ display:block; }
+  .quote-card{
+    background:var(--navy); color:#fff; border-radius:10px; padding:26px; margin-top:8px;
+  }
+  .quote-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
+  .quote-head .brand{ font-size:12px; letter-spacing:3px; color:var(--gold); font-weight:bold;}
+  .quote-head h3{ margin:4px 0 0; font-size:22px;}
+  .quote-meta{ font-size:12px; color:#B8C4D6; text-align:right;}
+  .quote-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; font-size:13px;}
+  .quote-grid div span{ display:block; color:#B8C4D6; font-size:11px; text-transform:uppercase; margin-bottom:2px;}
+  table.pay-table{ width:100%; margin-top:10px; font-size:13px;}
+  table.pay-table th{ color:#B8C4D6; border-bottom:1px solid rgba(255,255,255,0.2);}
+  table.pay-table td{ border-bottom:1px solid rgba(255,255,255,0.12); color:#fff;}
+  .total-line{ display:flex; justify-content:space-between; font-size:16px; font-weight:bold; margin-top:14px; color:var(--gold);}
+  .quote-foot{ font-size:11px; color:#8FA1BD; margin-top:18px; line-height:1.5;}
+
+  .actions{ display:flex; gap:10px; margin-top:16px;}
+  .btn{
+    padding:11px 18px; border-radius:6px; border:none; font-size:14px; cursor:pointer; font-weight:bold;
+  }
+  .btn-primary{ background:var(--gold); color:var(--navy-deep);}
+  .btn-secondary{ background:#fff; color:var(--navy); border:1px solid #D7DCE3;}
+
+  .placeholder{ color:#8FA1BD; text-align:center; padding:40px 10px; font-size:14px;}
+
+  @media print{
+    header, .step:not(#quoteStep), .actions, .filters{ display:none !important;}
+    body{ background:#fff;}
+    .quote-card{ box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">NARA AMÉRICAS</div>
+  <h1>Cotizador de unidades</h1>
+  <p>Encuentra tu espacio ideal — Av. Américas, Guadalajara, Jalisco</p>
+</header>
+
+<div class="wrap">
+
+  <div class="step">
+    <h2>Paso 1 — Datos del asesor y cliente</h2>
+    <div class="grid2" style="margin-bottom:14px;">
+      <div><label>Nombre del asesor</label><input id="advName" placeholder="Nombre completo"></div>
+      <div><label>Teléfono del asesor</label><input id="advPhone" placeholder="33 0000 0000"></div>
+    </div>
+    <div class="grid2">
+      <div><label>Nombre del cliente</label><input id="cliName" placeholder="Nombre completo"></div>
+      <div><label>Teléfono del cliente</label><input id="cliPhone" placeholder="33 0000 0000"></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2>Paso 2 — Selecciona la unidad</h2>
+    <div class="filters" id="filters"></div>
+    <div style="overflow-x:auto;">
+      <table id="unitTable">
+        <thead>
+          <tr><th>Unidad</th><th>Tipo</th><th>Nivel</th><th>m²</th><th>Precio</th><th>Estatus</th></tr>
+        </thead>
+        <tbody id="unitBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="step" id="quoteStep">
+    <h2>Paso 3 — Forma de pago y cotización</h2>
+    <div id="noSelection" class="placeholder">Selecciona una unidad disponible arriba para ver su cotización</div>
+
+    <div id="paymentBlock" style="display:none;">
+      <div class="pay-row">
+        <label>Enganche (%)</label>
+        <input type="number" id="pctEnganche" value="20" min="0" max="100">
+        <div class="pay-amount" id="amtEnganche">—</div>
+      </div>
+      <div class="pay-row">
+        <label>Durante construcción (%)</label>
+        <input type="number" id="pctConstruccion" value="30" min="0" max="100">
+        <div class="pay-amount" id="amtConstruccion">—</div>
+      </div>
+      <div class="pay-row">
+        <label>Contra entrega (%)</label>
+        <input type="number" id="pctEntrega" value="20" min="0" max="100">
+        <div class="pay-amount" id="amtEntrega">—</div>
+      </div>
+      <div class="pay-row">
+        <label>Contra escrituración (%)</label>
+        <input type="number" id="pctEscritura" value="30" min="0" max="100">
+        <div class="pay-amount" id="amtEscritura">—</div>
+      </div>
+      <div class="pay-total" id="payTotalCheck">Suma: 100% ✓</div>
+    </div>
+
+    <div id="quote">
+      <div class="quote-card">
+        <div class="quote-head">
+          <div>
+            <div class="brand">NARA AMÉRICAS</div>
+            <h3 id="qUnit">—</h3>
+            <div id="qDesc" style="color:#B8C4D6; font-size:13px;">—</div>
+          </div>
+          <div class="quote-meta">
+            Cotización generada el<br><span id="qDate">—</span><br>Vigencia: 30 días naturales
+          </div>
+        </div>
+        <div class="quote-grid">
+          <div><span>Asesor</span><span id="qAdv" style="color:#fff; font-weight:bold;">—</span></div>
+          <div><span>Cliente</span><span id="qCli" style="color:#fff; font-weight:bold;">—</span></div>
+        </div>
+        <table class="pay-table">
+          <thead><tr><th>Concepto</th><th>%</th><th style="text-align:right;">Monto</th></tr></thead>
+          <tbody id="qPayBody"></tbody>
+        </table>
+        <div class="total-line"><span>Precio total de la unidad</span><span id="qTotal">—</span></div>
+        <div class="quote-foot">
+          Los precios son en moneda nacional (MXN) e incluyen IVA donde aplica. Esta cotización tiene vigencia
+          de 30 días naturales a partir de la fecha de emisión. Precios y disponibilidad sujetos a cambio sin
+          previo aviso. Para más información contacta a tu asesor NARA Américas.
+        </div>
+      </div>
+    </div>
+
+    <div class="actions" id="actionButtons" style="display:none;">
+      <button class="btn btn-primary" onclick="window.print()">Descargar / Imprimir PDF</button>
+      <button class="btn btn-secondary" onclick="shareWhatsApp()">Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const UNITS = [{"clave": "501-A", "tipo": "Departamento", "nivel": 5, "m2": 72.0, "precio": 5518800, "rec": 2, "desc": "2 baños · Vista interior", "status": "Disponible"}, {"clave": "501-B", "tipo": "Departamento", "nivel": 5, "m2": 62.0, "precio": 4752300, "rec": 1, "desc": "1 baño · Planta eficiente", "status": "Disponible"}, {"clave": "503-C", "tipo": "Departamento", "nivel": 5, "m2": 72.0, "precio": 5518800, "rec": 2, "desc": "2 baños · Vista lateral", "status": "Disponible"}, {"clave": "504-D", "tipo": "Departamento", "nivel": 5, "m2": 60.0, "precio": 4599000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "505-E", "tipo": "Departamento", "nivel": 5, "m2": 40.0, "precio": 3066000, "rec": 1, "desc": "1 baño · Compacto", "status": "Disponible"}, {"clave": "506-F", "tipo": "Departamento", "nivel": 5, "m2": 35.0, "precio": 2682750, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "507-G", "tipo": "Departamento", "nivel": 5, "m2": 47.0, "precio": 3602550, "rec": 1, "desc": "1 baño · Compacto", "status": "Disponible"}, {"clave": "601-A", "tipo": "Departamento", "nivel": 6, "m2": 72.0, "precio": 5594400, "rec": 2, "desc": "2 baños · Vista Av. Américas", "status": "Disponible"}, {"clave": "602-B", "tipo": "Departamento", "nivel": 6, "m2": 62.0, "precio": 4817400, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "603-C", "tipo": "Departamento", "nivel": 6, "m2": 72.0, "precio": 5594400, "rec": 2, "desc": "2 baños · Vista lateral", "status": "Disponible"}, {"clave": "604-D", "tipo": "Departamento", "nivel": 6, "m2": 60.0, "precio": 4662000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "605-E", "tipo": "Departamento", "nivel": 6, "m2": 40.0, "precio": 3108000, "rec": 1, "desc": "1 baño · Compacto", "status": "Disponible"}, {"clave": "606-F", "tipo": "Departamento", "nivel": 6, "m2": 35.0, "precio": 2719500, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "607-G", "tipo": "Departamento", "nivel": 6, "m2": 47.0, "precio": 3651900, "rec": 1, "desc": "1 baño · Compacto", "status": "Disponible"}, {"clave": "701-A", "tipo": "Departamento", "nivel": 7, "m2": 72.0, "precio": 5670000, "rec": 2, "desc": "2 baños · Vista Av. Américas", "status": "Disponible"}, {"clave": "702-B", "tipo": "Departamento", "nivel": 7, "m2": 62.0, "precio": 4882500, "rec": 1, "desc": "1 baño", "status": "Apartado"}, {"clave": "703-C", "tipo": "Departamento", "nivel": 7, "m2": 72.0, "precio": 5670000, "rec": 2, "desc": "2 baños · Vista lateral", "status": "Disponible"}, {"clave": "704-D", "tipo": "Departamento", "nivel": 7, "m2": 60.0, "precio": 4725000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "705-E", "tipo": "Departamento", "nivel": 7, "m2": 40.0, "precio": 3150000, "rec": 1, "desc": "1 baño · Compacto", "status": "Disponible"}, {"clave": "706-F", "tipo": "Departamento", "nivel": 7, "m2": 35.0, "precio": 2756250, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "707-G", "tipo": "Departamento", "nivel": 7, "m2": 47.0, "precio": 3701250, "rec": 1, "desc": "1 baño · Compacto", "status": "Disponible"}, {"clave": "801-A", "tipo": "Departamento", "nivel": 8, "m2": 72.0, "precio": 5745600, "rec": 2, "desc": "2 baños · Vista Av. Américas", "status": "Disponible"}, {"clave": "802-B", "tipo": "Departamento", "nivel": 8, "m2": 62.0, "precio": 4947600, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "803-C", "tipo": "Departamento", "nivel": 8, "m2": 72.0, "precio": 5745600, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "804-D", "tipo": "Departamento", "nivel": 8, "m2": 60.0, "precio": 4788000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "805-E", "tipo": "Departamento", "nivel": 8, "m2": 40.0, "precio": 3192000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "806-F", "tipo": "Departamento", "nivel": 8, "m2": 35.0, "precio": 2793000, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "807-G", "tipo": "Departamento", "nivel": 8, "m2": 47.0, "precio": 3750600, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "901-A", "tipo": "Departamento", "nivel": 9, "m2": 72.0, "precio": 5896800, "rec": 2, "desc": "2 baños · Vistas superiores", "status": "Disponible"}, {"clave": "902-B", "tipo": "Departamento", "nivel": 9, "m2": 62.0, "precio": 5077800, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "903-C", "tipo": "Departamento", "nivel": 9, "m2": 72.0, "precio": 5896800, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "904-D", "tipo": "Departamento", "nivel": 9, "m2": 60.0, "precio": 4914000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "905-E", "tipo": "Departamento", "nivel": 9, "m2": 40.0, "precio": 3276000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "906-F", "tipo": "Departamento", "nivel": 9, "m2": 35.0, "precio": 2866500, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "907-G", "tipo": "Departamento", "nivel": 9, "m2": 47.0, "precio": 3849300, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1001-A", "tipo": "Departamento", "nivel": 10, "m2": 72.0, "precio": 6048000, "rec": 2, "desc": "2 baños · Vista panorámica", "status": "Disponible"}, {"clave": "1002-B", "tipo": "Departamento", "nivel": 10, "m2": 62.0, "precio": 5208000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1003-C", "tipo": "Departamento", "nivel": 10, "m2": 72.0, "precio": 6048000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "1004-D", "tipo": "Departamento", "nivel": 10, "m2": 60.0, "precio": 5040000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "1005-E", "tipo": "Departamento", "nivel": 10, "m2": 40.0, "precio": 3360000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1006-F", "tipo": "Departamento", "nivel": 10, "m2": 35.0, "precio": 2940000, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "1007-G", "tipo": "Departamento", "nivel": 10, "m2": 47.0, "precio": 3948000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1101-A", "tipo": "Departamento", "nivel": 11, "m2": 72.0, "precio": 6048000, "rec": 2, "desc": "2 baños · Vista panorámica", "status": "Disponible"}, {"clave": "1102-B", "tipo": "Departamento", "nivel": 11, "m2": 62.0, "precio": 5208000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1103-C", "tipo": "Departamento", "nivel": 11, "m2": 72.0, "precio": 6048000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "1104-D", "tipo": "Departamento", "nivel": 11, "m2": 60.0, "precio": 5103000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "1105-E", "tipo": "Departamento", "nivel": 11, "m2": 40.0, "precio": 3402000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1106-F", "tipo": "Departamento", "nivel": 11, "m2": 35.0, "precio": 2976750, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "1107-G", "tipo": "Departamento", "nivel": 11, "m2": 47.0, "precio": 3997350, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1201-A", "tipo": "Departamento", "nivel": 12, "m2": 72.0, "precio": 6123600, "rec": 2, "desc": "2 baños · Vista panorámica", "status": "Disponible"}, {"clave": "1202-B", "tipo": "Departamento", "nivel": 12, "m2": 62.0, "precio": 5338200, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1203-C", "tipo": "Departamento", "nivel": 12, "m2": 72.0, "precio": 6199200, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "1204-D", "tipo": "Departamento", "nivel": 12, "m2": 60.0, "precio": 5166000, "rec": 2, "desc": "2 baños", "status": "Disponible"}, {"clave": "1205-E", "tipo": "Departamento", "nivel": 12, "m2": 40.0, "precio": 3444000, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1206-F", "tipo": "Departamento", "nivel": 12, "m2": 35.0, "precio": 3013500, "rec": 1, "desc": "Estudio", "status": "Disponible"}, {"clave": "1207-G", "tipo": "Departamento", "nivel": 12, "m2": 47.0, "precio": 4046700, "rec": 1, "desc": "1 baño", "status": "Disponible"}, {"clave": "1401", "tipo": "Skyloft", "nivel": 14, "m2": 131.14, "precio": 11015760, "rec": 3, "desc": "Doble altura · Roof privado", "status": "Disponible"}, {"clave": "1402", "tipo": "Skyloft", "nivel": 14, "m2": 127.34, "precio": 10696560, "rec": 3, "desc": "Doble altura · Roof privado", "status": "Disponible"}];
+
+const fmt = n => n.toLocaleString('es-MX', { style:'currency', currency:'MXN', maximumFractionDigits:0 });
+
+let currentType = 'Todos';
+let selected = null;
+
+function typeList(){
+  const set = new Set(UNITS.map(u => u.tipo));
+  return ['Todos', ...set];
+}
+
+function renderFilters(){
+  const el = document.getElementById('filters');
+  el.innerHTML = '';
+  typeList().forEach(t => {
+    const b = document.createElement('button');
+    b.textContent = t;
+    if (t === currentType) b.classList.add('active');
+    b.onclick = () => { currentType = t; renderFilters(); renderTable(); };
+    el.appendChild(b);
+  });
+}
+
+function renderTable(){
+  const body = document.getElementById('unitBody');
+  body.innerHTML = '';
+  const list = UNITS.filter(u => currentType === 'Todos' || u.tipo === currentType);
+  list.forEach(u => {
+    const tr = document.createElement('tr');
+    tr.className = 'unit-row';
+    if (selected && selected.clave === u.clave) tr.classList.add('selected');
+    const statusClass = u.status === 'Disponible' ? 'status-disp' : 'status-apart';
+    tr.innerHTML = `
+      <td><strong>${u.clave}</strong></td>
+      <td>${u.tipo}</td>
+      <td>Niv. ${u.nivel}</td>
+      <td>${u.m2} m²</td>
+      <td>${fmt(u.precio)}</td>
+      <td class="${statusClass}">${u.status}</td>
+    `;
+    if (u.status === 'Disponible') {
+      tr.onclick = () => selectUnit(u);
+    } else {
+      tr.style.opacity = '0.5';
+      tr.style.cursor = 'default';
+    }
+    body.appendChild(tr);
+  });
+}
+
+function selectUnit(u){
+  selected = u;
+  renderTable();
+  document.getElementById('noSelection').style.display = 'none';
+  document.getElementById('paymentBlock').style.display = 'block';
+  document.getElementById('actionButtons').style.display = 'flex';
+  updateQuote();
+}
+
+function pct(id){ return parseFloat(document.getElementById(id).value) || 0; }
+
+function updateQuote(){
+  if (!selected) return;
+  const pE = pct('pctEnganche'), pC = pct('pctConstruccion'), pEnt = pct('pctEntrega'), pEsc = pct('pctEscritura');
+  const sum = pE + pC + pEnt + pEsc;
+  const total = selected.precio;
+
+  document.getElementById('amtEnganche').textContent = fmt(total * pE / 100);
+  document.getElementById('amtConstruccion').textContent = fmt(total * pC / 100);
+  document.getElementById('amtEntrega').textContent = fmt(total * pEnt / 100);
+  document.getElementById('amtEscritura').textContent = fmt(total * pEsc / 100);
+
+  const totalCheck = document.getElementById('payTotalCheck');
+  if (Math.abs(sum - 100) < 0.01) {
+    totalCheck.className = 'pay-total ok';
+    totalCheck.textContent = `Suma: ${sum}% ✓`;
+    document.getElementById('quote').classList.add('show');
+    renderQuoteCard(pE, pC, pEnt, pEsc, total);
+  } else {
+    totalCheck.className = 'pay-total err';
+    totalCheck.textContent = `Suma: ${sum}% — debe sumar 100%`;
+    document.getElementById('quote').classList.remove('show');
+  }
+}
+
+function renderQuoteCard(pE, pC, pEnt, pEsc, total){
+  document.getElementById('qUnit').textContent = `Unidad ${selected.clave} — ${selected.tipo} Niv.${selected.nivel}`;
+  document.getElementById('qDesc').textContent = `${selected.m2} m² · ${selected.desc}`;
+  document.getElementById('qDate').textContent = new Date().toLocaleDateString('es-MX', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('qAdv').textContent = document.getElementById('advName').value || '—';
+  document.getElementById('qCli').textContent = document.getElementById('cliName').value || '—';
+  document.getElementById('qTotal').textContent = fmt(total);
+
+  const rows = [
+    ['Enganche', pE, total * pE / 100],
+    ['Durante construcción', pC, total * pC / 100],
+    ['Contra entrega', pEnt, total * pEnt / 100],
+    ['Contra escrituración', pEsc, total * pEsc / 100],
+  ];
+  document.getElementById('qPayBody').innerHTML = rows.map(r =>
+    `<tr><td>${r[0]}</td><td>${r[1]}%</td><td style="text-align:right;">${fmt(r[2])}</td></tr>`
+  ).join('');
+}
+
+function shareWhatsApp(){
+  if (!selected) return;
+  const adv = document.getElementById('advName').value || 'tu asesor NARA Américas';
+  const cli = document.getElementById('cliName').value || 'Cliente';
+  const msg = `Hola ${cli}, te comparto la cotización de la unidad ${selected.clave} (${selected.tipo} Niv.${selected.nivel}, ${selected.m2} m²) en NARA Américas: ${fmt(selected.precio)}. Cotización generada por ${adv}.`;
+  const url = 'https://wa.me/?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+}
+
+['pctEnganche','pctConstruccion','pctEntrega','pctEscritura','advName','cliName'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateQuote);
+});
+
+renderFilters();
+renderTable();
+</script>
+
+</body>
+</html>

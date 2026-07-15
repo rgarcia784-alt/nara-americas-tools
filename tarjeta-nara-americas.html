@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>NARA Américas — Tarjeta de Asesor</title>
+<title>NARA Américas — Tarjeta Digital</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   :root{
@@ -10,100 +10,164 @@
     --navy-deep:#071731;
     --gold:#C49A28;
     --off:#F4F5F7;
+    --bluegray-lt:#B8C4D6;
   }
   *{box-sizing:border-box;}
   body{
-    font-family: Calibri, Arial, sans-serif; background:var(--off); margin:0; padding:30px;
-  }
-  .toolbar{
-    max-width:700px; margin:0 auto 20px; background:#fff; border-radius:10px; padding:16px 20px;
-    box-shadow:0 1px 4px rgba(0,0,0,0.08); display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;
-  }
-  .toolbar div{ flex:1; min-width:160px;}
-  .toolbar label{ font-size:11px; font-weight:bold; color:var(--navy); display:block; margin-bottom:4px; text-transform:uppercase;}
-  .toolbar input{ width:100%; padding:8px 10px; border:1px solid #D7DCE3; border-radius:6px; font-family:inherit; font-size:14px;}
-  .toolbar button{
-    background:var(--gold); color:var(--navy-deep); border:none; padding:10px 18px; border-radius:6px;
-    font-weight:bold; cursor:pointer; font-size:13px;
+    font-family: Calibri, Arial, sans-serif; background:var(--off); margin:0; padding:20px;
+    display:flex; flex-direction:column; align-items:center;
   }
 
-  .stage{ max-width:700px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:20px;}
+  .editBox{
+    width:100%; max-width:380px; background:#fff; border-radius:12px; padding:18px 20px;
+    box-shadow:0 1px 4px rgba(0,0,0,0.08); margin-bottom:22px;
+  }
+  .editBox h4{ margin:0 0 12px; font-size:13px; color:var(--navy); text-transform:uppercase; letter-spacing:1px;}
+  .editBox label{ font-size:11px; font-weight:bold; color:#667; display:block; margin:10px 0 4px;}
+  .editBox input{ width:100%; padding:9px 10px; border:1px solid #D7DCE3; border-radius:6px; font-family:inherit; font-size:14px;}
 
   .card{
-    width:336px; height:192px; border-radius:14px; position:relative; overflow:hidden;
-    box-shadow:0 8px 24px rgba(10,31,68,0.18);
-    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
-    color:#fff; padding:22px 24px;
+    width:100%; max-width:380px; border-radius:18px; position:relative; overflow:hidden;
+    background:linear-gradient(150deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff; padding:30px 26px 26px; box-shadow:0 12px 30px rgba(10,31,68,0.25);
   }
-  .card .circle{
-    position:absolute; border-radius:50%; background:rgba(255,255,255,0.05);
-  }
-  .card .c1{ width:160px; height:160px; top:-60px; right:-50px;}
-  .card .c2{ width:100px; height:100px; bottom:-40px; left:-30px;}
-  .card .brand{ font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:bold; position:relative; z-index:2;}
-  .card .name{ font-size:20px; font-weight:bold; margin-top:34px; position:relative; z-index:2;}
-  .card .role{ font-size:11px; color:#B8C4D6; margin-top:2px; position:relative; z-index:2;}
-  .card .divider{ width:34px; height:2px; background:var(--gold); margin:14px 0 12px; position:relative; z-index:2;}
-  .card .contact{ font-size:11px; color:#fff; line-height:1.6; position:relative; z-index:2;}
-  .card .contact b{ color:var(--gold);}
+  .card .circle{ position:absolute; border-radius:50%; background:rgba(255,255,255,0.05);}
+  .card .c1{ width:220px; height:220px; top:-100px; right:-80px;}
+  .card .c2{ width:140px; height:140px; bottom:-60px; left:-40px;}
 
-  .card.back{
-    background:var(--off); color:var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center;
-    box-shadow:0 8px 24px rgba(10,31,68,0.10);
-  }
-  .card.back .brand{ font-size:13px; letter-spacing:4px; color:var(--gold); font-weight:bold; margin-bottom:6px;}
-  .card.back .tag{ font-size:12px; color:#555;}
+  .brand{ font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:bold; position:relative; z-index:2;}
 
-  @media print{
-    .toolbar{ display:none; }
-    body{ padding:0; background:#fff; }
-    .stage{ flex-direction:row; gap:14px; }
-    .card{ box-shadow:none; }
+  .avatar{
+    width:64px; height:64px; border-radius:50%; background:var(--gold); color:var(--navy-deep);
+    display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;
+    margin-top:20px; position:relative; z-index:2;
   }
+
+  .name{ font-size:22px; font-weight:bold; margin-top:16px; position:relative; z-index:2;}
+  .role{ font-size:12px; color:var(--bluegray-lt); margin-top:2px; position:relative; z-index:2;}
+
+  .divider{ width:36px; height:2px; background:var(--gold); margin:18px 0 16px; position:relative; z-index:2;}
+
+  .info{ font-size:13px; line-height:2; position:relative; z-index:2;}
+  .info .label{ color:var(--bluegray-lt); font-size:10px; text-transform:uppercase; letter-spacing:1px; margin-right:6px;}
+
+  .devinfo{
+    margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);
+    font-size:11px; color:var(--bluegray-lt); position:relative; z-index:2;
+  }
+
+  .actions{ width:100%; max-width:380px; display:flex; gap:10px; margin-top:18px;}
+  .btn{
+    flex:1; padding:13px 10px; border-radius:8px; border:none; font-weight:bold; font-size:13px;
+    cursor:pointer; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .btn-whatsapp{ background:#25D366; color:#fff; }
+  .btn-save{ background:var(--navy); color:#fff; }
+  .btn-call{ background:#fff; color:var(--navy); border:1px solid #D7DCE3; }
+
+  .hint{ max-width:380px; text-align:center; font-size:11px; color:#8892A0; margin-top:14px; }
 </style>
 </head>
 <body>
 
-  <div class="toolbar">
-    <div>
-      <label>Nombre del asesor</label>
-      <input id="inName" placeholder="Nombre completo" value="Nombre del Asesor">
-    </div>
-    <div>
-      <label>Teléfono</label>
-      <input id="inPhone" placeholder="33 0000 0000" value="33 0000 0000">
-    </div>
-    <button onclick="update()">Actualizar</button>
-    <button onclick="window.print()">Imprimir / PDF</button>
+  <div class="editBox">
+    <h4>Personaliza tu tarjeta</h4>
+    <label>Nombre</label>
+    <input id="inName" value="Nombre del Asesor">
+    <label>Teléfono (WhatsApp)</label>
+    <input id="inPhone" value="3300000000" placeholder="10 dígitos, sin espacios">
+    <label>Correo</label>
+    <input id="inEmail" value="asesor@correo.com">
   </div>
 
-  <div class="stage">
-    <div class="card">
-      <div class="circle c1"></div>
-      <div class="circle c2"></div>
-      <div class="brand">NARA AMÉRICAS</div>
-      <div class="name" id="cardName">Nombre del Asesor</div>
-      <div class="role">Asesor inmobiliario acreditado</div>
-      <div class="divider"></div>
-      <div class="contact">
-        <b>Tel.</b> <span id="cardPhone">33 0000 0000</span><br>
-        <b>Desarrollo</b> Av. Américas, Guadalajara, Jal.
-      </div>
+  <div class="card" id="cardEl">
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="brand">NARA AMÉRICAS</div>
+    <div class="avatar" id="avatarInitials">NA</div>
+    <div class="name" id="cardName">Nombre del Asesor</div>
+    <div class="role">Asesor inmobiliario acreditado</div>
+    <div class="divider"></div>
+    <div class="info">
+      <div><span class="label">Tel</span><span id="cardPhoneDisplay">33 0000 0000</span></div>
+      <div><span class="label">Email</span><span id="cardEmail">asesor@correo.com</span></div>
     </div>
-
-    <div class="card back">
-      <div class="brand">NARA AMÉRICAS</div>
-      <div class="tag">Av. Américas · Guadalajara, Jalisco</div>
-    </div>
+    <div class="devinfo">NARA Américas · Av. Américas, Guadalajara, Jalisco</div>
   </div>
+
+  <div class="actions">
+    <a class="btn btn-call" id="btnCall" href="tel:3300000000">📞 Llamar</a>
+    <button class="btn btn-save" onclick="saveContact()">⬇ Guardar contacto</button>
+  </div>
+  <div class="actions">
+    <a class="btn btn-whatsapp" id="btnShare" href="#" target="_blank">Enviar mi tarjeta por WhatsApp</a>
+  </div>
+
+  <div class="hint">Personaliza tus datos arriba, luego comparte esta misma página con tu cliente o usa los botones para llamarte, guardarte como contacto o recibir tu tarjeta por WhatsApp.</div>
 
 <script>
-function update(){
-  document.getElementById('cardName').textContent = document.getElementById('inName').value || 'Nombre del Asesor';
-  document.getElementById('cardPhone').textContent = document.getElementById('inPhone').value || '33 0000 0000';
+function initials(name){
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return 'NA';
+  if (parts.length === 1) return parts[0].substring(0,2).toUpperCase();
+  return (parts[0][0] + parts[1][0]).toUpperCase();
 }
-document.getElementById('inName').addEventListener('input', update);
-document.getElementById('inPhone').addEventListener('input', update);
+
+function formatPhone(p){
+  const digits = p.replace(/\D/g,'');
+  if (digits.length !== 10) return p;
+  return digits.slice(0,2) + ' ' + digits.slice(2,6) + ' ' + digits.slice(6);
+}
+
+function update(){
+  const name = document.getElementById('inName').value || 'Nombre del Asesor';
+  const phoneRaw = document.getElementById('inPhone').value || '';
+  const email = document.getElementById('inEmail').value || 'asesor@correo.com';
+  const digits = phoneRaw.replace(/\D/g,'');
+
+  document.getElementById('cardName').textContent = name;
+  document.getElementById('avatarInitials').textContent = initials(name);
+  document.getElementById('cardPhoneDisplay').textContent = formatPhone(phoneRaw);
+  document.getElementById('cardEmail').textContent = email;
+
+  document.getElementById('btnCall').href = 'tel:' + digits;
+
+  const msg = `Hola, soy ${name}, asesor de NARA Américas. Te comparto mis datos de contacto: Tel. ${formatPhone(phoneRaw)} · ${email}. Cualquier duda sobre el desarrollo, aquí estoy.`;
+  document.getElementById('btnShare').href = 'https://wa.me/52' + digits + '?text=' + encodeURIComponent(msg);
+}
+
+function saveContact(){
+  const name = document.getElementById('inName').value || 'Nombre del Asesor';
+  const phoneRaw = document.getElementById('inPhone').value || '';
+  const email = document.getElementById('inEmail').value || 'asesor@correo.com';
+  const digits = phoneRaw.replace(/\D/g,'');
+
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    `FN:${name}`,
+    `ORG:NARA Américas`,
+    `TITLE:Asesor inmobiliario acreditado`,
+    `TEL;TYPE=CELL:${digits}`,
+    `EMAIL:${email}`,
+    'END:VCARD'
+  ].join('\n');
+
+  const blob = new Blob([vcard], { type: 'text/vcard' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = name.replace(/\s+/g,'_') + '_NARA_Americas.vcf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+['inName','inPhone','inEmail'].forEach(id => {
+  document.getElementById(id).addEventListener('input', update);
+});
+update();
 </script>
 
 </body>

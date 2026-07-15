@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>NARA Américas — Herramientas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --navy:#0A1F44;
+    --navy-deep:#071731;
+    --bluegray-lt:#748CAB;
+    --gold:#C49A28;
+    --off:#F4F5F7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:Calibri, Arial, sans-serif; background:var(--off); color:#1B1F27;
+  }
+  .hero{
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff; padding:70px 24px; text-align:center;
+  }
+  .hero .brand{ letter-spacing:4px; font-size:13px; color:var(--gold); font-weight:bold;}
+  .hero h1{ font-size:32px; margin:10px 0 6px;}
+  .hero p{ color:var(--bluegray-lt); font-size:16px; max-width:520px; margin:0 auto;}
+
+  .wrap{ max-width:900px; margin:-40px auto 0; padding:0 20px 60px;}
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:760px){ .grid{ grid-template-columns:1fr;} }
+
+  .card{
+    background:#fff; border-radius:12px; padding:26px; box-shadow:0 4px 16px rgba(10,31,68,0.08);
+    display:flex; flex-direction:column;
+  }
+  .card h3{ color:var(--navy); font-size:18px; margin:0 0 8px;}
+  .card p{ color:#555; font-size:13px; line-height:1.5; margin:0 0 18px; flex-grow:1;}
+  .card a{
+    background:var(--gold); color:var(--navy-deep); text-decoration:none; font-weight:bold;
+    padding:11px 16px; border-radius:6px; text-align:center; font-size:13px;
+  }
+
+  footer{ text-align:center; padding:26px; color:#748CAB; font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="brand">NARA AMÉRICAS</div>
+  <h1>Espacio de herramientas</h1>
+  <p>Cotizador, portal de asesores y tarjeta de presentación — todo en un solo lugar.</p>
+</div>
+
+<div class="wrap">
+  <div class="grid">
+    <div class="card">
+      <h3>Cotizador</h3>
+      <p>Selecciona una unidad, ajusta la forma de pago y genera la cotización para tu cliente.</p>
+      <a href="cotizador-nara-americas.html">Abrir cotizador →</a>
+    </div>
+    <div class="card">
+      <h3>Portal de asesores</h3>
+      <p>Información del programa, incentivo Puerto Vallarta y acceso rápido al cotizador.</p>
+      <a href="portal-nara-americas.html">Abrir portal →</a>
+    </div>
+    <div class="card">
+      <h3>Tarjeta digital</h3>
+      <p>Personaliza tus datos y compártela directo con tu cliente por WhatsApp, o deja que te guarde como contacto.</p>
+      <a href="tarjeta-nara-americas.html">Abrir tarjeta →</a>
+    </div>
+  </div>
+</div>
+
+<footer>NARA Américas — Av. Américas, Guadalajara, Jalisco</footer>
+
+</body>
+</html>

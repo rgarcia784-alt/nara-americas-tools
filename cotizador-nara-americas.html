@@ -99,6 +99,7 @@
 
   @media print{
     .project-page{ page-break-before: always; box-shadow:none; padding:0; }
+    .project-page img{ max-height:9.5in; width:auto; max-width:100%; margin:0 auto; object-fit:contain;}
   }
 
   .actions{ display:flex; gap:10px; margin-top:16px;}
@@ -112,8 +113,11 @@
 
   @media print{
     header, .step:not(#quoteStep), .actions, .filters{ display:none !important;}
-    body{ background:#fff;}
-    .quote-card{ box-shadow:none;}
+    #quoteStep h2, #noSelection, #paymentBlock{ display:none !important;}
+    body{ background:#fff; margin:0;}
+    .step{ box-shadow:none; padding:0; margin:0;}
+    .quote-card{ box-shadow:none; page-break-inside:avoid; break-inside:avoid;}
+    .project-page{ box-shadow:none; page-break-inside:avoid; break-inside:avoid;}
   }
 </style>
 </head>

@@ -226,7 +226,7 @@
         </table>
         <div class="total-line"><span>Precio total de la unidad</span><span id="qTotal">—</span></div>
         <div class="quote-foot">
-          Los precios son en moneda nacional (MXN) e incluyen IVA donde aplica. Esta cotización tiene vigencia
+          Los precios son en moneda nacional (MXN). Esta cotización tiene vigencia
           de 30 días naturales a partir de la fecha de emisión. Precios y disponibilidad sujetos a cambio sin
           previo aviso. Para más información contacta a tu asesor NARA Américas.
         </div>
@@ -402,9 +402,10 @@ function renderQuoteCard(pE, pC, pEnt, pEsc, total){
 
   const advName = document.getElementById('advName').value || 'tu asesor NARA Américas';
   const cliName = document.getElementById('cliName').value.trim();
-  const cliGreetName = cliName || 'estimado(a) cliente';
-  document.getElementById('qGreeting').textContent =
-    `Estimado(a) ${cliGreetName}: adjunto encontrará la cotización de la unidad ${selected.clave} del desarrollo NARA Américas, elaborada por ${advName}. Quedamos a sus órdenes para cualquier duda o para agendar una visita.`;
+  const greeting = cliName
+    ? `Estimado(a) ${cliName}: adjunto encontrará la cotización de la unidad ${selected.clave} del desarrollo NARA Américas, elaborada por ${advName}. Quedamos a sus órdenes para cualquier duda o para agendar una visita.`
+    : `Estimado(a) cliente: adjunto encontrará la cotización de la unidad ${selected.clave} del desarrollo NARA Américas, elaborada por ${advName}. Quedamos a sus órdenes para cualquier duda o para agendar una visita.`;
+  document.getElementById('qGreeting').textContent = greeting;
 
   document.getElementById('qAdv').textContent = document.getElementById('advName').value || '—';
   document.getElementById('qCli').textContent = document.getElementById('cliName').value || '—';

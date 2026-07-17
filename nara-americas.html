@@ -16,11 +16,11 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #1a1a2e;
+    --navy: #0a2647;
     --gold: #c9a84c;
     --gold-light: #e8c97a;
     --cream: #f5f0e8;
-    --dark: #111118;
+    --dark: #081524;
     --text: #1a1a2e;
     --muted: #6b6b80;
     --border: rgba(26,26,46,0.12);
@@ -34,13 +34,13 @@
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16.5px;
+    line-height: 1.65;
   }
 
   /* HERO */
   .hero {
-    background: linear-gradient(180deg, rgba(17,17,24,0.55) 0%, rgba(17,17,24,0.75) 55%, var(--navy) 100%), url('nara-hero.jpg');
+    background: linear-gradient(180deg, rgba(6,16,29,0.72) 0%, rgba(6,16,29,0.85) 55%, var(--navy) 100%), url('nara-hero.jpg');
     background-size: cover;
     background-position: center 30%;
     min-height: 100vh;
@@ -75,22 +75,22 @@
 
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 10vw, 88px);
+    font-size: clamp(64px, 12vw, 108px);
     font-weight: 300;
     color: var(--cream);
     line-height: 1;
-    letter-spacing: -1px;
-    margin-bottom: 0.25rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 0.4s;
   }
 
   .hero-sub {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(16px, 3vw, 22px);
+    font-size: clamp(19px, 3.4vw, 26px);
     font-weight: 300;
     color: var(--gold);
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     text-transform: uppercase;
     margin-bottom: 2rem;
     opacity: 0;
@@ -179,6 +179,16 @@
 
   @keyframes scrollLine { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.15)} }
 
+  /* FOTO EDIFICIO FULL */
+  .building-photo { width: 100%; height: 70vh; min-height: 420px; overflow: hidden; position: relative; }
+  .building-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .building-photo .bp-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(0deg, rgba(8,21,36,0.65), transparent);
+    color: rgba(245,240,232,0.85); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 32px 2rem 16px; text-align: center;
+  }
+
   /* SECTIONS */
   .section {
     padding: 5rem 2rem;
@@ -196,11 +206,12 @@
 
   .section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 5vw, 40px);
+    font-size: clamp(34px, 5.8vw, 48px);
     font-weight: 300;
     color: var(--navy);
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
     line-height: 1.15;
+    letter-spacing: 0.3px;
   }
 
   .divider-line {
@@ -227,7 +238,7 @@
   }
 
   .stat-item .s-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .stat-item .s-value { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+  .stat-item .s-value { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--navy); line-height: 1; margin-bottom: 4px; }
   .stat-item .s-sub { font-size: 12px; color: var(--muted); }
 
   /* AMENIDADES */
@@ -274,7 +285,7 @@
   .foto-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .foto-caption {
     position: absolute; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(0deg, rgba(17,17,24,0.75), transparent);
+    background: linear-gradient(0deg, rgba(8,21,36,0.75), transparent);
     color: #fff; font-size: 12px; font-weight: 500; padding: 22px 12px 10px;
   }
 
@@ -297,7 +308,7 @@
   .modelo-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
   .modelo-item .m-body { padding: 1rem 1.1rem 1.2rem; text-align: center; }
   .modelo-item .m-tipo { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  .modelo-item .m-m2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--navy); }
+  .modelo-item .m-m2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--navy); }
   .modelo-item .m-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
   /* UBICACIÓN */
@@ -313,25 +324,27 @@
   .pay-section .section-label { color: var(--gold); }
   .pay-section .divider-line { background: var(--gold); }
 
-  .unit-tabs { display: flex; gap: 8px; margin-bottom: 2rem; flex-wrap: wrap; }
+  .tipo-select-wrap { margin-bottom: 1.75rem; }
 
-  .unit-tab {
-    font-size: 13px;
-    padding: 7px 18px;
-    border-radius: 24px;
-    border: 1px solid rgba(201,168,76,0.3);
-    background: transparent;
-    color: rgba(245,240,232,0.5);
-    cursor: pointer;
-    transition: all 0.2s;
+  .tipo-select {
+    width: 100%;
+    max-width: 480px;
+    font-size: 14.5px;
     font-family: 'DM Sans', sans-serif;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(201,168,76,0.35);
+    background: rgba(245,240,232,0.06);
+    color: var(--cream);
+    cursor: pointer;
+    margin-top: 8px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a84c' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px;
   }
-
-  .unit-tab.active { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 500; }
-  .unit-tab:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
-
-  .unit-panel { display: none; }
-  .unit-panel.active { display: block; }
+  .tipo-select option { background: var(--navy); color: var(--cream); }
 
   .pay-card {
     background: rgba(245,240,232,0.05);
@@ -385,9 +398,26 @@
   }
 
   .mensual-box .ml { font-size: 12px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
-  .mensual-box .mr { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--cream); }
+  .mensual-box .mr { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: var(--cream); }
 
   .pay-note-foot { font-size: 12px; color: rgba(245,240,232,0.35); margin-top: 1rem; font-style: italic; }
+
+  .btn-pdf {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 13px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(201,168,76,0.4);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-pdf:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
 
   /* POR QUÉ */
   .why-grid {
@@ -402,7 +432,7 @@
   }
 
   .why-item .w-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-  .why-item .w-value { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--navy); margin-bottom: 3px; }
+  .why-item .w-value { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--navy); margin-bottom: 3px; }
   .why-item .w-sub { font-size: 12px; color: var(--muted); }
 
   /* CONTACT */
@@ -416,21 +446,22 @@
 
   .contact-brand {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
+    font-size: 50px;
     font-weight: 300;
     color: var(--cream);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
   }
 
-  .contact-sub { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 2.5rem; }
+  .contact-sub { font-size: 12.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 2.75rem; }
 
   .contact-phone {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 300;
     color: var(--cream);
     margin-bottom: 1.75rem;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
   }
 
   .btn-wa-lg {
@@ -503,6 +534,11 @@
     <span></span>
   </div>
 </section>
+
+<div class="building-photo">
+  <img src="nara-hero.jpg" alt="Fachada NARA Américas" loading="lazy">
+  <p class="bp-caption">NARA Américas · Av. Prolongación Américas, Zapopan</p>
+</div>
 
 <!-- EL PROYECTO -->
 <section class="section">
@@ -584,58 +620,110 @@
     <h2 class="section-title">Ejemplos de inversión</h2>
     <div class="divider-line"></div>
 
-    <div class="unit-tabs">
-      <button class="unit-tab active" onclick="switchUnit('tf', this)">Tipo F Sur — 35 m²</button>
-      <button class="unit-tab" onclick="switchUnit('ta', this)">Tipo A Norte — 72 m²</button>
+    <div class="tipo-select-wrap">
+      <label class="plazo-label" for="unitSelect">Elige la unidad disponible</label>
+      <select id="unitSelect" class="tipo-select" onchange="actualizarPago()">
+          <optgroup label="Nivel 5">
+            <option value="0">501-A · 72 m² · 2 baños · Vista interior — $5,518,800</option>
+            <option value="1">501-B · 62 m² · 1 baño · Planta eficiente — $4,752,300</option>
+            <option value="2">503-C · 72 m² · 2 baños · Vista lateral — $5,518,800</option>
+            <option value="3">504-D · 60 m² · 2 baños — $4,599,000</option>
+            <option value="4">505-E · 40 m² · 1 baño · Compacto — $3,066,000</option>
+            <option value="5" selected>506-F · 35 m² · Estudio — $2,682,750</option>
+            <option value="6">507-G · 47 m² · 1 baño · Compacto — $3,602,550</option>
+          </optgroup>
+          <optgroup label="Nivel 6">
+            <option value="7">601-A · 72 m² · 2 baños · Vista Av. Américas — $5,594,400</option>
+            <option value="8">602-B · 62 m² · 1 baño — $4,817,400</option>
+            <option value="9">603-C · 72 m² · 2 baños · Vista lateral — $5,594,400</option>
+            <option value="10">604-D · 60 m² · 2 baños — $4,662,000</option>
+            <option value="11">605-E · 40 m² · 1 baño · Compacto — $3,108,000</option>
+            <option value="12">606-F · 35 m² · Estudio — $2,719,500</option>
+            <option value="13">607-G · 47 m² · 1 baño · Compacto — $3,651,900</option>
+          </optgroup>
+          <optgroup label="Nivel 7">
+            <option value="14">701-A · 72 m² · 2 baños · Vista Av. Américas — $5,670,000</option>
+            <option value="15">703-C · 72 m² · 2 baños · Vista lateral — $5,670,000</option>
+            <option value="16">704-D · 60 m² · 2 baños — $4,725,000</option>
+            <option value="17">705-E · 40 m² · 1 baño · Compacto — $3,150,000</option>
+            <option value="18">706-F · 35 m² · Estudio — $2,756,250</option>
+            <option value="19">707-G · 47 m² · 1 baño · Compacto — $3,701,250</option>
+          </optgroup>
+          <optgroup label="Nivel 8">
+            <option value="20">801-A · 72 m² · 2 baños · Vista Av. Américas — $5,745,600</option>
+            <option value="21">802-B · 62 m² · 1 baño — $4,947,600</option>
+            <option value="22">803-C · 72 m² · 2 baños — $5,745,600</option>
+            <option value="23">804-D · 60 m² · 2 baños — $4,788,000</option>
+            <option value="24">805-E · 40 m² · 1 baño — $3,192,000</option>
+            <option value="25">806-F · 35 m² · Estudio — $2,793,000</option>
+            <option value="26">807-G · 47 m² · 1 baño — $3,750,600</option>
+          </optgroup>
+          <optgroup label="Nivel 9">
+            <option value="27">901-A · 72 m² · 2 baños · Vistas superiores — $5,896,800</option>
+            <option value="28">902-B · 62 m² · 1 baño — $5,077,800</option>
+            <option value="29">903-C · 72 m² · 2 baños — $5,896,800</option>
+            <option value="30">904-D · 60 m² · 2 baños — $4,914,000</option>
+            <option value="31">905-E · 40 m² · 1 baño — $3,276,000</option>
+            <option value="32">906-F · 35 m² · Estudio — $2,866,500</option>
+            <option value="33">907-G · 47 m² · 1 baño — $3,849,300</option>
+          </optgroup>
+          <optgroup label="Nivel 10">
+            <option value="34">1001-A · 72 m² · 2 baños · Vista panorámica — $6,048,000</option>
+            <option value="35">1002-B · 62 m² · 1 baño — $5,208,000</option>
+            <option value="36">1003-C · 72 m² · 2 baños — $6,048,000</option>
+            <option value="37">1004-D · 60 m² · 2 baños — $5,040,000</option>
+            <option value="38">1005-E · 40 m² · 1 baño — $3,360,000</option>
+            <option value="39">1006-F · 35 m² · Estudio — $2,940,000</option>
+            <option value="40">1007-G · 47 m² · 1 baño — $3,948,000</option>
+          </optgroup>
+          <optgroup label="Nivel 11">
+            <option value="41">1101-A · 72 m² · 2 baños · Vista panorámica — $6,048,000</option>
+            <option value="42">1102-B · 62 m² · 1 baño — $5,208,000</option>
+            <option value="43">1103-C · 72 m² · 2 baños — $6,048,000</option>
+            <option value="44">1104-D · 60 m² · 2 baños — $5,103,000</option>
+            <option value="45">1105-E · 40 m² · 1 baño — $3,402,000</option>
+            <option value="46">1106-F · 35 m² · Estudio — $2,976,750</option>
+            <option value="47">1107-G · 47 m² · 1 baño — $3,997,350</option>
+          </optgroup>
+          <optgroup label="Nivel 12">
+            <option value="48">1201-A · 72 m² · 2 baños · Vista panorámica — $6,123,600</option>
+            <option value="49">1202-B · 62 m² · 1 baño — $5,338,200</option>
+            <option value="50">1203-C · 72 m² · 2 baños — $6,199,200</option>
+            <option value="51">1204-D · 60 m² · 2 baños — $5,166,000</option>
+            <option value="52">1205-E · 40 m² · 1 baño — $3,444,000</option>
+            <option value="53">1206-F · 35 m² · Estudio — $3,013,500</option>
+            <option value="54">1207-G · 47 m² · 1 baño — $4,046,700</option>
+          </optgroup>
+          <optgroup label="Nivel 14">
+            <option value="55">1401 · 131.14 m² · Doble altura · Roof privado — $11,015,760</option>
+            <option value="56">1402 · 127.34 m² · Doble altura · Roof privado — $10,696,560</option>
+          </optgroup>
+      </select>
     </div>
 
-    <!-- TIPO F -->
-    <div class="unit-panel active" id="tf">
-      <div class="pay-card">
-        <div class="pay-row"><span class="pl">Precio de lista</span><span class="pr">$2,682,750</span></div>
-        <div class="pay-row"><span class="pl">20% Enganche — al apartar</span><span class="pr">$536,550</span></div>
-        <div class="pay-row"><span class="pl">20% Contra entrega</span><span class="pr">$536,550</span></div>
-        <div class="pay-row"><span class="pl">60% Durante la obra</span><span class="pr">$1,609,650</span></div>
+    <div class="pay-card">
+      <p id="pc-nivel" style="color: var(--gold); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;">Depto. 506-F · Nivel 5 · 35 m²</p>
+      <div class="pay-row"><span class="pl">Precio de lista</span><span class="pr" id="pc-precio">$2,682,750</span></div>
+      <div class="pay-row"><span class="pl">20% Enganche — al apartar</span><span class="pr" id="pc-enganche">$536,550</span></div>
+      <div class="pay-row"><span class="pl">20% Contra entrega</span><span class="pr" id="pc-entrega">$536,550</span></div>
+      <div class="pay-row"><span class="pl">60% Durante la obra</span><span class="pr" id="pc-obra">$1,609,650</span></div>
 
-        <div class="plazo-section">
-          <p class="plazo-label">Elige el plazo</p>
-          <div class="plazo-btns" id="plazo-tf">
-            <button class="plazo-btn" onclick="setPlazo('tf', 12, this)">12 meses</button>
-            <button class="plazo-btn" onclick="setPlazo('tf', 18, this)">18 meses</button>
-            <button class="plazo-btn active" onclick="setPlazo('tf', 24, this)">24 meses</button>
-          </div>
-          <div class="mensual-box">
-            <span class="ml">Mensualidad estimada</span>
-            <span class="mr" id="mensual-tf">$67,069 / mes</span>
-          </div>
+      <div class="plazo-section">
+        <p class="plazo-label">Elige el plazo</p>
+        <div class="plazo-btns" id="plazo-btns">
+          <button class="plazo-btn" onclick="setPlazo(12, this)">12 meses</button>
+          <button class="plazo-btn active" onclick="setPlazo(18, this)">18 meses</button>
+        </div>
+        <div class="mensual-box">
+          <span class="ml">Mensualidad estimada</span>
+          <span class="mr" id="pc-mensual">$89,425 / mes</span>
         </div>
       </div>
-      <p class="pay-note-foot">* Ejemplo orientativo con base en el cotizador oficial. Precios y disponibilidad sujetos a cambio.</p>
+      <button class="btn-pdf" onclick="descargarCotizacionPDF()">📄 Descargar esta cotización en PDF</button>
     </div>
+    <p class="pay-note-foot">* Precio exacto por unidad y nivel, con base en el cotizador oficial vigente. Disponibilidad e inventario sujetos a cambio sin previo aviso.</p>
 
-    <!-- TIPO A -->
-    <div class="unit-panel" id="ta">
-      <div class="pay-card">
-        <div class="pay-row"><span class="pl">Precio de lista</span><span class="pr">$5,518,800</span></div>
-        <div class="pay-row"><span class="pl">20% Enganche — al apartar</span><span class="pr">$1,103,760</span></div>
-        <div class="pay-row"><span class="pl">20% Contra entrega</span><span class="pr">$1,103,760</span></div>
-        <div class="pay-row"><span class="pl">60% Durante la obra</span><span class="pr">$3,311,280</span></div>
-
-        <div class="plazo-section">
-          <p class="plazo-label">Elige el plazo</p>
-          <div class="plazo-btns" id="plazo-ta">
-            <button class="plazo-btn" onclick="setPlazo('ta', 12, this)">12 meses</button>
-            <button class="plazo-btn" onclick="setPlazo('ta', 18, this)">18 meses</button>
-            <button class="plazo-btn active" onclick="setPlazo('ta', 24, this)">24 meses</button>
-          </div>
-          <div class="mensual-box">
-            <span class="ml">Mensualidad estimada</span>
-            <span class="mr" id="mensual-ta">$137,970 / mes</span>
-          </div>
-        </div>
-      </div>
-      <p class="pay-note-foot">* Ejemplo orientativo con base en el cotizador oficial. Precios y disponibilidad sujetos a cambio.</p>
-    </div>
+    <p style="text-align:center; font-size:13px; color:rgba(245,240,232,0.55); margin-top:2rem;">📁 Carpeta legal completa disponible para revisión en punto de venta.</p>
   </div>
 </section>
 
@@ -664,6 +752,11 @@
       <p class="w-label">Desarrollador</p>
       <p class="w-value">NARA Capital</p>
       <p class="w-sub">Grupo VEQ</p>
+    </div>
+    <div class="why-item">
+      <p class="w-label">Respaldo legal</p>
+      <p class="w-value">Fideicomiso</p>
+      <p class="w-sub">Protege tu inversión durante la obra</p>
     </div>
   </div>
 </section>
@@ -698,24 +791,190 @@
 </footer>
 
 <script>
-  var bases = { 'tf': 1609650, 'ta': 3311280 };
+  var unidades = [
+    { clave: "501-A", nivel: 5, m2: 72.0, precio: 5518800 },
+    { clave: "501-B", nivel: 5, m2: 62.0, precio: 4752300 },
+    { clave: "503-C", nivel: 5, m2: 72.0, precio: 5518800 },
+    { clave: "504-D", nivel: 5, m2: 60.0, precio: 4599000 },
+    { clave: "505-E", nivel: 5, m2: 40.0, precio: 3066000 },
+    { clave: "506-F", nivel: 5, m2: 35.0, precio: 2682750 },
+    { clave: "507-G", nivel: 5, m2: 47.0, precio: 3602550 },
+    { clave: "601-A", nivel: 6, m2: 72.0, precio: 5594400 },
+    { clave: "602-B", nivel: 6, m2: 62.0, precio: 4817400 },
+    { clave: "603-C", nivel: 6, m2: 72.0, precio: 5594400 },
+    { clave: "604-D", nivel: 6, m2: 60.0, precio: 4662000 },
+    { clave: "605-E", nivel: 6, m2: 40.0, precio: 3108000 },
+    { clave: "606-F", nivel: 6, m2: 35.0, precio: 2719500 },
+    { clave: "607-G", nivel: 6, m2: 47.0, precio: 3651900 },
+    { clave: "701-A", nivel: 7, m2: 72.0, precio: 5670000 },
+    { clave: "703-C", nivel: 7, m2: 72.0, precio: 5670000 },
+    { clave: "704-D", nivel: 7, m2: 60.0, precio: 4725000 },
+    { clave: "705-E", nivel: 7, m2: 40.0, precio: 3150000 },
+    { clave: "706-F", nivel: 7, m2: 35.0, precio: 2756250 },
+    { clave: "707-G", nivel: 7, m2: 47.0, precio: 3701250 },
+    { clave: "801-A", nivel: 8, m2: 72.0, precio: 5745600 },
+    { clave: "802-B", nivel: 8, m2: 62.0, precio: 4947600 },
+    { clave: "803-C", nivel: 8, m2: 72.0, precio: 5745600 },
+    { clave: "804-D", nivel: 8, m2: 60.0, precio: 4788000 },
+    { clave: "805-E", nivel: 8, m2: 40.0, precio: 3192000 },
+    { clave: "806-F", nivel: 8, m2: 35.0, precio: 2793000 },
+    { clave: "807-G", nivel: 8, m2: 47.0, precio: 3750600 },
+    { clave: "901-A", nivel: 9, m2: 72.0, precio: 5896800 },
+    { clave: "902-B", nivel: 9, m2: 62.0, precio: 5077800 },
+    { clave: "903-C", nivel: 9, m2: 72.0, precio: 5896800 },
+    { clave: "904-D", nivel: 9, m2: 60.0, precio: 4914000 },
+    { clave: "905-E", nivel: 9, m2: 40.0, precio: 3276000 },
+    { clave: "906-F", nivel: 9, m2: 35.0, precio: 2866500 },
+    { clave: "907-G", nivel: 9, m2: 47.0, precio: 3849300 },
+    { clave: "1001-A", nivel: 10, m2: 72.0, precio: 6048000 },
+    { clave: "1002-B", nivel: 10, m2: 62.0, precio: 5208000 },
+    { clave: "1003-C", nivel: 10, m2: 72.0, precio: 6048000 },
+    { clave: "1004-D", nivel: 10, m2: 60.0, precio: 5040000 },
+    { clave: "1005-E", nivel: 10, m2: 40.0, precio: 3360000 },
+    { clave: "1006-F", nivel: 10, m2: 35.0, precio: 2940000 },
+    { clave: "1007-G", nivel: 10, m2: 47.0, precio: 3948000 },
+    { clave: "1101-A", nivel: 11, m2: 72.0, precio: 6048000 },
+    { clave: "1102-B", nivel: 11, m2: 62.0, precio: 5208000 },
+    { clave: "1103-C", nivel: 11, m2: 72.0, precio: 6048000 },
+    { clave: "1104-D", nivel: 11, m2: 60.0, precio: 5103000 },
+    { clave: "1105-E", nivel: 11, m2: 40.0, precio: 3402000 },
+    { clave: "1106-F", nivel: 11, m2: 35.0, precio: 2976750 },
+    { clave: "1107-G", nivel: 11, m2: 47.0, precio: 3997350 },
+    { clave: "1201-A", nivel: 12, m2: 72.0, precio: 6123600 },
+    { clave: "1202-B", nivel: 12, m2: 62.0, precio: 5338200 },
+    { clave: "1203-C", nivel: 12, m2: 72.0, precio: 6199200 },
+    { clave: "1204-D", nivel: 12, m2: 60.0, precio: 5166000 },
+    { clave: "1205-E", nivel: 12, m2: 40.0, precio: 3444000 },
+    { clave: "1206-F", nivel: 12, m2: 35.0, precio: 3013500 },
+    { clave: "1207-G", nivel: 12, m2: 47.0, precio: 4046700 },
+    { clave: "1401", nivel: 14, m2: 131.14, precio: 11015760 },
+    { clave: "1402", nivel: 14, m2: 127.34, precio: 10696560 },
+  ];
+  var plazoActual = 18;
 
-  function fmt(n) {
-    return '$' + Math.round(n).toLocaleString('es-MX') + ' / mes';
+  function fmtMoney(n) {
+    return '$' + Math.round(n).toLocaleString('es-MX');
   }
 
-  function setPlazo(unit, meses, el) {
-    document.querySelectorAll('#plazo-' + unit + ' .plazo-btn').forEach(function(b) { b.classList.remove('active'); });
-    el.classList.add('active');
-    document.getElementById('mensual-' + unit).textContent = fmt(bases[unit] / meses);
+  function actualizarPago() {
+    var idx = parseInt(document.getElementById('unitSelect').value, 10);
+    var unidad = unidades[idx];
+    var precio = unidad.precio;
+    var enganche = precio * 0.2;
+    var entrega = precio * 0.2;
+    var obra = precio * 0.6;
+
+    document.getElementById('pc-nivel').textContent = 'Depto. ' + unidad.clave + ' · Nivel ' + unidad.nivel + ' · ' + unidad.m2 + ' m²';
+    document.getElementById('pc-precio').textContent = fmtMoney(precio);
+    document.getElementById('pc-enganche').textContent = fmtMoney(enganche);
+    document.getElementById('pc-entrega').textContent = fmtMoney(entrega);
+    document.getElementById('pc-obra').textContent = fmtMoney(obra);
+    document.getElementById('pc-mensual').textContent = fmtMoney(obra / plazoActual) + ' / mes';
   }
 
-  function switchUnit(id, el) {
-    document.querySelectorAll('.unit-panel').forEach(function(p) { p.classList.remove('active'); });
-    document.querySelectorAll('.unit-tab').forEach(function(t) { t.classList.remove('active'); });
-    document.getElementById(id).classList.add('active');
+  function setPlazo(meses, el) {
+    plazoActual = meses;
+    document.querySelectorAll('#plazo-btns .plazo-btn').forEach(function(b) { b.classList.remove('active'); });
     el.classList.add('active');
+    actualizarPago();
+  }
+
+  function descargarCotizacionPDF() {
+    var idx = parseInt(document.getElementById('unitSelect').value, 10);
+    var unidad = unidades[idx];
+    var precio = unidad.precio;
+    var enganche = precio * 0.2;
+    var entrega = precio * 0.2;
+    var obra = precio * 0.6;
+    var mensual = obra / plazoActual;
+    var fecha = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    var { jsPDF } = window.jspdf;
+    var doc = new jsPDF({ unit: 'mm', format: 'letter' });
+    var marginLeft = 20, marginRight = 20;
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var y = 28;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(10, 38, 71);
+    doc.text('NARA', pageWidth / 2, y, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.setTextColor(150, 120, 60);
+    y += 7;
+    doc.text('AMÉRICAS · COTIZACIÓN', pageWidth / 2, y, { align: 'center' });
+    y += 4;
+    doc.setDrawColor(201, 168, 76);
+    doc.setLineWidth(0.6);
+    doc.line(marginLeft, y, pageWidth - marginRight, y);
+    y += 12;
+
+    doc.setFontSize(10);
+    doc.setTextColor(90, 90, 100);
+    doc.text('Fecha: ' + fecha, marginLeft, y);
+    y += 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(10, 38, 71);
+    doc.text('Depto. ' + unidad.clave + ' · Nivel ' + unidad.nivel + ' · ' + unidad.m2 + ' m²', marginLeft, y);
+    y += 4;
+    doc.setDrawColor(220, 220, 220);
+    doc.setLineWidth(0.2);
+    doc.line(marginLeft, y, pageWidth - marginRight, y);
+    y += 10;
+
+    function fila(label, valor, negrita) {
+      doc.setFont('helvetica', negrita ? 'bold' : 'normal');
+      doc.setFontSize(11);
+      doc.setTextColor(60, 60, 70);
+      doc.text(label, marginLeft, y);
+      doc.setTextColor(10, 38, 71);
+      doc.text(valor, pageWidth - marginRight, y, { align: 'right' });
+      y += 8;
+    }
+
+    fila('Precio de lista', fmtMoney(precio), true);
+    y += 2;
+    fila('20% Enganche — al apartar', fmtMoney(enganche));
+    fila('20% Contra entrega', fmtMoney(entrega));
+    fila('60% Durante la obra', fmtMoney(obra));
+    y += 4;
+    doc.setDrawColor(220, 220, 220);
+    doc.line(marginLeft, y, pageWidth - marginRight, y);
+    y += 10;
+
+    fila('Plazo elegido', plazoActual + ' meses');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(150, 120, 60);
+    doc.text('Mensualidad estimada', marginLeft, y);
+    doc.text(fmtMoney(mensual) + ' / mes', pageWidth - marginRight, y, { align: 'right' });
+    y += 16;
+
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(8.5);
+    doc.setTextColor(140, 140, 140);
+    var nota = 'Cotización orientativa con base en el cotizador oficial vigente al día de hoy. Precio, disponibilidad y condiciones sujetos a cambio sin previo aviso. No constituye una oferta vinculante.';
+    var notaLineas = doc.splitTextToSize(nota, pageWidth - marginLeft - marginRight);
+    doc.text(notaLineas, marginLeft, y);
+    y += notaLineas.length * 4 + 10;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(10, 38, 71);
+    doc.text('UNO Brokers · Asesor comercial de NARA Américas', marginLeft, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(90, 90, 100);
+    doc.text('33 3967 5255', marginLeft, y);
+
+    doc.save('cotizacion-nara-americas-' + unidad.clave + '.pdf');
   }
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

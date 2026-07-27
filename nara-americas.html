@@ -681,8 +681,7 @@
       <div class="plazo-section">
         <p class="plazo-label">Elige el plazo</p>
         <div class="plazo-btns" id="plazo-btns">
-          <button class="plazo-btn" onclick="setPlazo(12, this)">12 meses</button>
-          <button class="plazo-btn active" onclick="setPlazo(18, this)">18 meses</button>
+          <button class="plazo-btn active" onclick="setPlazo(24, this)">24 meses</button>
         </div>
         <div class="mensual-box">
           <span class="ml">Mensualidad estimada</span>
@@ -801,7 +800,7 @@
     { clave: "1404", tipo: "Sky Loft", nivel: 14, m2: 130.4, precio: 11084000, desc: "2 recámaras + estudio · 2 cajones" },
     { clave: "1406", tipo: "Sky Loft", nivel: 14, m2: 67.11, precio: 5704350, desc: "1 recámara · 2 cajones" },
   ];
-  var plazoActual = 18;
+  var plazoActual = 24;
 
   function fmtMoney(n) {
     return '$' + Math.round(n).toLocaleString('es-MX');

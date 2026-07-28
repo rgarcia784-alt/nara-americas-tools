@@ -137,6 +137,10 @@
   .hero-cta {
     opacity: 0;
     animation: fadeUp 0.8s ease forwards 1s;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .btn-wa {
@@ -157,6 +161,24 @@
   .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
 
   .btn-wa svg { width: 20px; height: 20px; fill: #fff; }
+
+  .btn-brochure-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    border: 1px solid rgba(201,168,76,0.5);
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .btn-brochure-hero:hover { transform: translateY(-2px); background: rgba(201,168,76,0.12); }
 
   .scroll-hint {
     position: absolute;
@@ -301,6 +323,35 @@
   .modelo-item .m-m2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--navy); }
   .modelo-item .m-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
+  /* RENDERS DESTACADOS */
+  .renders-section {
+    background: var(--dark);
+    padding: 5rem 2rem;
+  }
+  .renders-inner { max-width: 900px; margin: 0 auto; }
+  .renders-section .section-label { color: var(--gold); }
+  .renders-section .section-title { color: var(--cream); }
+  .renders-section .divider-line { background: var(--gold); }
+  .renders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .render-item {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .render-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .render-caption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(0deg, rgba(8,21,36,0.85), transparent);
+    color: var(--cream); font-size: 13px; font-weight: 500; padding: 30px 16px 14px;
+    letter-spacing: 0.3px;
+  }
+
   /* UBICACIÓN */
   .ubi-flex { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
   .ubi-flex img { width: 100%; max-width: 380px; border-radius: 12px; display: block; }
@@ -409,6 +460,30 @@
   }
   .btn-pdf:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
 
+  .btn-pdf-gold {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+  .btn-pdf-gold:hover { background: var(--gold-light); border-color: var(--gold-light); }
+
+  .pdf-btns-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .pdf-btns-row .btn-pdf {
+    flex: 1;
+    min-width: 220px;
+    margin-top: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+
   /* POR QUÉ */
   .why-grid {
     display: grid;
@@ -495,6 +570,7 @@
     .pay-section { padding: 3.5rem 1.25rem; }
     .contact-section { padding: 3.5rem 1.25rem; }
     .pay-card { padding: 1.25rem; }
+    .renders-section { padding: 3.5rem 1.25rem; }
   }
 </style>
 </head>
@@ -517,6 +593,9 @@
     <a class="btn-wa" href="https://wa.me/523339675255?text=Hola%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20NARA%20Am%C3%A9ricas%2C%20departamentos%20en%20preventa%20en%20Zapopan" target="_blank">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.526 5.855L.057 23.882a.5.5 0 0 0 .611.611l6.084-1.496A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 0 1-5.032-1.385l-.36-.214-3.733.918.952-3.645-.235-.374A9.786 9.786 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
       Solicitar información
+    </a>
+    <a class="btn-brochure-hero" href="NARA_Americas_Brochure.pdf" target="_blank">
+      📖 Descargar brochure
     </a>
   </div>
   <div class="scroll-hint">
@@ -595,6 +674,19 @@
     <div class="modelo-item"><img src="nara-modelo-e.jpg" alt="Departamento Tipo E Sur" loading="lazy"><div class="m-body"><p class="m-tipo">Tipo E sur</p><p class="m-m2">37 m²</p><p class="m-sub">1 recámara</p></div></div>
     <div class="modelo-item"><img src="nara-modelo-f.jpg" alt="Departamento Tipo F Sur" loading="lazy"><div class="m-body"><p class="m-tipo">Tipo F sur</p><p class="m-m2">35 m²</p><p class="m-sub">1 recámara</p></div></div>
     <div class="modelo-item"><img src="nara-modelo-g.jpg" alt="Departamento Tipo G Sur" loading="lazy"><div class="m-body"><p class="m-tipo">Tipo G sur</p><p class="m-m2">47 m²</p><p class="m-sub">Estudio + 1 rec.</p></div></div>
+  </div>
+</section>
+
+<!-- RENDERS DESTACADOS -->
+<section class="renders-section">
+  <div class="renders-inner">
+    <p class="section-label">Vistas del proyecto</p>
+    <h2 class="section-title">Así se verá<br>NARA Américas</h2>
+    <div class="divider-line"></div>
+    <div class="renders-grid">
+      <div class="render-item"><img src="nara-render-sala.jpg" alt="Render sala y comedor NARA Américas" loading="lazy"><span class="render-caption">Sala y comedor · doble altura</span></div>
+      <div class="render-item"><img src="nara-render-recamara.jpg" alt="Render recámara principal NARA Américas" loading="lazy"><span class="render-caption">Recámara principal · vista panorámica</span></div>
+    </div>
   </div>
 </section>
 
@@ -692,9 +784,10 @@
     </div>
     <p class="pay-note-foot">* Precio exacto por unidad y nivel, con base en el cotizador oficial vigente. Disponibilidad e inventario sujetos a cambio sin previo aviso.</p>
 
-    <p style="text-align:center; margin-top:1.5rem;">
-      <a class="btn-pdf" href="NARA_Americas_Lista_de_Precios.pdf" target="_blank" style="text-decoration:none; display:inline-block;">📋 Ver lista de precios completa (PDF)</a>
-    </p>
+    <div class="pdf-btns-row">
+      <a class="btn-pdf" href="NARA_Americas_Lista_de_Precios.pdf" target="_blank">📋 Ver lista de precios completa (PDF)</a>
+      <a class="btn-pdf btn-pdf-gold" href="NARA_Americas_Brochure.pdf" target="_blank">📖 Descargar brochure (PDF)</a>
+    </div>
 
     <p style="text-align:center; font-size:13px; color:rgba(245,240,232,0.55); margin-top:2rem;">📁 Carpeta legal completa disponible para revisión en punto de venta.</p>
   </div>

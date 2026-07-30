@@ -56,9 +56,13 @@
   td{ padding:9px 8px; border-bottom:1px solid #EEF0F3;}
   tr.unit-row{ cursor:pointer;}
   tr.unit-row:hover{ background:#F8FAFC;}
-  tr.selected{ background:#EEF3FB;}
+  tr.selected{ background:#EEF3FB; box-shadow: inset 4px 0 0 var(--gold);}
   .status-disp{ color:#1D7A46; font-weight:bold;}
   .status-apart{ color:#B15A00; font-weight:bold;}
+  .status-cotizando{
+    color:#fff; background:var(--gold); font-weight:bold; font-size:11px;
+    padding:4px 10px; border-radius:12px; display:inline-block; letter-spacing:0.3px;
+  }
 
   .pay-plan-title{ font-size:16px; font-weight:bold; color:var(--navy); margin-bottom:14px;}
   .pay-plan-grid{ display:grid; grid-template-columns:1fr 1.3fr 1fr; gap:12px; align-items:stretch;}
@@ -138,7 +142,11 @@
   <div class="brand">NARA AMÉRICAS</div>
   <h1>Cotizador de unidades</h1>
   <p>Encuentra tu espacio ideal — Av. Américas, Guadalajara, Jalisco</p>
-  <p style="margin-top:10px;"><a href="NARA_Americas_Lista_de_Precios.pdf" style="color:#C49A28; font-weight:bold; text-decoration:none;" target="_blank">📄 Ver lista de precios completa (PDF)</a></p>
+  <p style="margin-top:10px;">
+    <a href="NARA_Americas_Lista_de_Precios.pdf" style="color:#C49A28; font-weight:bold; text-decoration:none;" target="_blank">📄 Ver lista de precios completa (PDF)</a>
+    &nbsp;&middot;&nbsp;
+    <a href="NARA_Americas_Brochure.pdf" style="color:#C49A28; font-weight:bold; text-decoration:none;" target="_blank">📖 Descargar brochure (PDF)</a>
+  </p>
 </header>
 
 <div class="wrap">
@@ -342,8 +350,12 @@ function renderTable(){
   list.forEach(u => {
     const tr = document.createElement('tr');
     tr.className = 'unit-row';
-    if (selected && selected.clave === u.clave) tr.classList.add('selected');
+    const isSelected = selected && selected.clave === u.clave;
+    if (isSelected) tr.classList.add('selected');
     const statusClass = u.status === 'Disponible' ? 'status-disp' : 'status-apart';
+    const statusCell = isSelected
+      ? `<span class="status-cotizando">✓ Cotizando</span>`
+      : `<span class="${statusClass}">${u.status}</span>`;
     tr.innerHTML = `
       <td><strong>${u.clave}</strong></td>
       <td>${u.tipo}</td>
@@ -351,7 +363,7 @@ function renderTable(){
       <td>${recCount(u.desc)}</td>
       <td>${u.m2} m²</td>
       <td>${fmt(u.precio)}</td>
-      <td class="${statusClass}">${u.status}</td>
+      <td>${statusCell}</td>
     `;
     if (u.status === 'Disponible') {
       tr.onclick = () => selectUnit(u);

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Índice UNO">
+<title>Índice de Páginas — UNO Brokers</title>
+<style>
+  :root {
+    --navy: #0a1f3d; --navy-light: #13315c; --gold: #c9a227; --gold-light: #e0c258;
+    --cream: #f7f5f0; --gray: #6b7280; --border: #d9d4c7; --green: #2ecc71; --orange: #e67e22;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--cream); color: var(--navy); padding: 24px 16px 60px; }
+  header { text-align:center; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 2px solid var(--gold); }
+  header h1 { margin: 0 0 4px; color: var(--navy); font-size: 24px; }
+  header p { margin:0; color: var(--gray); font-size: 13px; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  .searchbar { margin: 18px 0; }
+  .searchbar input {
+    width:100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border);
+    font-size: 15px; color: var(--navy);
+  }
+  .count { text-align:center; color: var(--gray); font-size: 13px; margin-bottom: 14px; }
+  .item {
+    background:#fff; border:1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .item .fname { font-weight:700; font-size: 13px; color: var(--navy); }
+  .item .title { font-size: 13px; color: var(--gray); margin-top:2px; }
+  .tag { display:inline-block; font-size:10px; font-weight:700; padding:2px 7px; border-radius:4px; margin-left:6px; vertical-align:middle; }
+  .tag.blog { background:#e8eef7; color:#2563eb; }
+  .tag.indep { background:#fdf3e0; color:#b8860b; }
+  .tag.otramarca { background:#f3e8fd; color:#7c3aed; }
+  .tag.landing { background:#e8fdf0; color:#15803d; }
+  .tag.prueba { background:#fde8e8; color:#c0392b; }
+  .status-ok { color: var(--green); font-weight:700; font-size:12px; }
+  .status-redirect { color: var(--orange); font-weight:700; font-size:12px; }
+  .status-pending { color: var(--gray); font-weight:700; font-size:12px; }
+  .buttons { display:flex; gap:6px; flex-shrink:0; }
+  .btn-open, .btn-copy, .btn-dl {
+    font-size:12px; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:600; cursor:pointer; border:none;
+  }
+  .btn-open { background: var(--navy); color: var(--gold-light); }
+  .btn-copy { background: var(--cream); color: var(--navy); border:1px solid var(--border); }
+  .btn-copy.copied { background: var(--green); color:#fff; border-color: var(--green); }
+  .btn-dl { background: var(--gold); color: var(--navy); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Índice de Páginas — UNO Brokers</h1>
+  <p>propiedades.unobrokers.mx · ordenadas alfabéticamente por nombre de archivo</p>
+</header>
+<div class="wrap">
+  <div class="searchbar"><input type="text" id="buscador" placeholder="Buscar página..." oninput="filtrar()"></div>
+  <div class="count" id="contador">61 páginas y herramientas (incluye sitios de colaboradores y CRM interno)</div>
+  <div id="lista"></div>
+</div>
+
+<script>
+const items = [
+{f:"administracion-de-rentas.html", t:"Administración de Rentas en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/administracion-de-rentas.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/administracion-de-rentas.html"},
+{f:"altare.html", t:"ALTARE Suites — Av. México 2849, Guadalajara", u:"https://propiedades.unobrokers.mx/altare.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/altare.html"},
+{f:"blog-errores-renta-zapopan.html", t:"¿Por qué tu casa lleva meses vacía? 5 errores comunes al rentar", u:"https://propiedades.unobrokers.mx/blog-errores-renta-zapopan.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/blog-errores-renta-zapopan.html", tag:"blog", tagLabel:"BLOG"},
+{f:"blog-fraudes-compraventa.html", t:"Cómo comprar o vender tu propiedad sin caer en un fraude", u:"https://propiedades.unobrokers.mx/blog-fraudes-compraventa.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/blog-fraudes-compraventa.html", tag:"blog", tagLabel:"BLOG"},
+{f:"precio-metro-cuadrado-zapopan-2026.html", t:"¿Cuánto Cuesta el Metro Cuadrado en Zapopan en 2026?", u:"http://blog.propiedades.unobrokers.mx/precio-metro-cuadrado-zapopan-2026.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/blog-inmobiliario-gdl/main/precio-metro-cuadrado-zapopan-2026.html", tag:"blog", tagLabel:"BLOG", status:"ok", statusText:"✓ En línea (HTTPS pendiente, usar http:// por ahora)"},
+{f:"busco-departamento-santa-fe-cdmx.html", t:"Comprar Departamento en Santa Fe CDMX", u:"https://propiedades.unobrokers.mx/busco-departamento-santa-fe-cdmx.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/busco-departamento-santa-fe-cdmx.html"},
+{f:"calculadora-isr-venta-propiedad.html", t:"Calculadora de ISR por Venta de Propiedad en Guadalajara y Zapopan 2026", u:"https://propiedades.unobrokers.mx/calculadora-isr-venta-propiedad.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/calculadora-isr-venta-propiedad.html"},
+{f:"calculadora-opinion-valor.html", t:"Calculadora de Opinión de Valor Inmobiliario en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/calculadora-opinion-valor.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/calculadora-opinion-valor.html"},
+{f:"captacion-departamentos-venta-zapopan-guadalajara.html", t:"¿Quieres Vender tu Departamento? Opinión de Valor Gratis en Zapopan y Guadalajara | Uno Brokers", u:"https://propiedades.unobrokers.mx/captacion-departamentos-venta-zapopan-guadalajara.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/captacion-departamentos-venta-zapopan-guadalajara.html"},
+{f:"captacion-rentas-zapopan-guadalajara.html", t:"Rentar mi Propiedad en Zapopan y Guadalajara", u:"https://propiedades.unobrokers.mx/rentar-propiedad-guadalajara.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/captacion-rentas-zapopan-guadalajara.html", status:"redirect", statusText:"↪ Redirige a rentar-propiedad-guadalajara.html"},
+{f:"cuanto-vale.html", t:"¿Cuánto Vale mi Casa? Calculadora y Opinión de Valor Gratis en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/calculadora-opinion-valor.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/cuanto-vale.html", status:"redirect", statusText:"↪ Redirige a calculadora-opinion-valor.html"},
+{f:"departamentos-bosque-real-cdmx.html", t:"Departamentos en Bosque Real CDMX – Venta y Renta", u:"https://propiedades.unobrokers.mx/departamentos-bosque-real-cdmx.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/departamentos-bosque-real-cdmx.html"},
+{f:"departamentos-renta-santa-fe-cdmx.html", t:"Renta tu Departamento en Santa Fe CDMX", u:"https://propiedades.unobrokers.mx/departamentos-renta-santa-fe-cdmx.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/departamentos-renta-santa-fe-cdmx.html"},
+{f:"departamentos-venta-santa-fe-cdmx.html", t:"Vende tu Departamento en Santa Fe CDMX", u:"https://propiedades.unobrokers.mx/departamentos-venta-santa-fe-cdmx.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/departamentos-venta-santa-fe-cdmx.html"},
+{f:"departamentos-venta-zapopan.html", t:"Departamentos en Venta en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/departamentos-venta-zapopan.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/departamentos-venta-zapopan.html"},
+{f:"desarrollos.html", t:"Comercialización de Desarrollos Inmobiliarios en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/desarrollos.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/desarrollos.html"},
+{f:"encuentra-tu-propiedad.html", t:"¿Qué Propiedad Buscas? Formulario de Calificación para Comprar o Rentar", u:"https://propiedades.unobrokers.mx/encuentra-tu-propiedad.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/encuentra-tu-propiedad.html"},
+{f:"generador-contrato-compraventa.html", t:"Generador de Contrato de Compraventa", u:"https://propiedades.unobrokers.mx/generador-contrato-compraventa.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/generador-contrato-compraventa.html"},
+{f:"generador-contrato-renta.html", t:"Generador de Contrato de Arrendamiento", u:"https://propiedades.unobrokers.mx/generador-contrato-renta.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/generador-contrato-renta.html"},
+{f:"index.html", t:"Vende o Renta tu Propiedad en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/index.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/index.html"},
+{f:"inmobiliaria-guadalajara-zapopan.html", t:"Inmobiliaria en Guadalajara y Zapopan — Vende, Renta o Compra", u:"https://propiedades.unobrokers.mx/inmobiliaria-guadalajara-zapopan.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/inmobiliaria-guadalajara-zapopan.html"},
+{f:"investigacion-inquilinos.html", t:"Investigación de Inquilinos en Guadalajara | Estudio Socioeconómico y Buró de Crédito", u:"https://propiedades.unobrokers.mx/investigacion-inquilinos.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/investigacion-inquilinos.html"},
+{f:"landmark-reserve-andares-piso25.html", t:"Departamento de Lujo en Venta en Landmark Reserve, Andares Zapopan – Piso 25", u:"https://rgarcia784-alt.github.io/landmark-reserve-andares/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landmark-reserve-andares/main/index.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"penthouse-landmark-puerta-de-hierro.html", t:"Penthouse en Venta en Landmark, Puerta de Hierro Zapopan – Piso 33", u:"https://rgarcia784-alt.github.io/landmark-reserve-andares/penthouse-landmark-puerta-de-hierro.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landmark-reserve-andares/main/penthouse-landmark-puerta-de-hierro.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"links.html", t:"UNO Brokers – Enlaces", u:"https://propiedades.unobrokers.mx/links.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/links.html"},
+{f:"los-suenos-residencial.html", t:"Los Sueños Residencial — Terrenos en Venta en Zapopan", u:"https://propiedades.unobrokers.mx/los-suenos-residencial.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/los-suenos-residencial.html"},
+{f:"los-suenos-terrenos.html", t:"Terrenos en Venta Los Sueños Residencial – Zapopan | Desde $8M MXN", u:"https://propiedades.unobrokers.mx/los-suenos-terrenos.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/los-suenos-terrenos.html"},
+{f:"origina-santa-fe-cdmx.html", t:"Origina Santa Fe CDMX – Departamentos en Venta", u:"https://propiedades.unobrokers.mx/origina-santa-fe-cdmx.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/origina-santa-fe-cdmx.html"},
+{f:"parque-nubax.html", t:"Parque Nubax — Lote Comercial 1,519.56 m² sobre Av. El Salto · Pre-renta BTS", u:"https://propiedades.unobrokers.mx/parque-nubax.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/parque-nubax.html"},
+{f:"plano-parque-nubax.pdf", t:"Parque Nubax — Plano ejecutivo de lotes y vialidades", u:"https://propiedades.unobrokers.mx/plano-parque-nubax.pdf", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/plano-parque-nubax.pdf"},
+{f:"portafolio-brokers.html", t:"Portafolio de Propiedades", u:"https://propiedades.unobrokers.mx/portafolio-brokers.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/portafolio-brokers.html"},
+{f:"propiedades.html", t:"Inmobiliaria en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/propiedades.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/propiedades.html"},
+{f:"puerta-de-hierro.html", t:"Vender o Rentar en Puerta de Hierro, Zapopan", u:"https://propiedades.unobrokers.mx/puerta-de-hierro.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/puerta-de-hierro.html"},
+{f:"renta-departamento-santa-fe-cdmx.html", t:"Departamentos en Renta Santa Fe CDMX", u:"https://propiedades.unobrokers.mx/renta-departamento-santa-fe-cdmx.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/renta-departamento-santa-fe-cdmx.html"},
+{f:"rentar-propiedad-guadalajara.html", t:"Rentar mi Propiedad en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/rentar-propiedad-guadalajara.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/rentar-propiedad-guadalajara.html", status:"ok", statusText:"✓ Indexada en Google"},
+{f:"rentas.html", t:"Renta tu Propiedad en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/rentas.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/rentas.html"},
+{f:"solicitud-arrendamiento.html", t:"Solicitud de Arrendamiento Gratis", u:"https://propiedades.unobrokers.mx/solicitud-arrendamiento.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/solicitud-arrendamiento.html", tag:"prueba", tagLabel:"PENDIENTE INDEXAR", status:"pending", statusText:"◐ Sin indexar — prueba paralela en repo independiente"},
+{f:"terrenos-venta-guadalajara.html", t:"Terrenos en Venta en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/terrenos-venta-guadalajara.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/terrenos-venta-guadalajara.html"},
+{f:"the-lighthouse-zapopan.html", t:"The Lighthouse Zapopan | Departamentos en Venta y Renta", u:"https://propiedades.unobrokers.mx/the-lighthouse-zapopan.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/the-lighthouse-zapopan.html", tag:"prueba", tagLabel:"PENDIENTE INDEXAR", status:"pending", statusText:"◐ Sin indexar — prueba paralela en repo independiente"},
+{f:"valle-real-zapopan.html", t:"Vende o Renta tu Casa en Valle Real, Zapopan", u:"https://propiedades.unobrokers.mx/valle-real-zapopan.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/valle-real-zapopan.html"},
+{f:"vender-casa-guadalajara.html", t:"Vender Casa en Guadalajara y Zapopan", u:"https://propiedades.unobrokers.mx/vender-casa-guadalajara.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/landing-inmobiliaria/main/vender-casa-guadalajara.html"},
+{f:"solicitud-arrendamiento.html (independiente)", t:"Solicitud de Arrendamiento — repo aparte, con FAQ y captación", u:"https://rgarcia784-alt.github.io/rentaguadalajara/solicitud-arrendamiento.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/rentaguadalajara/main/solicitud-arrendamiento.html", tag:"indep", tagLabel:"INDEPENDIENTE", status:"ok", statusText:"✓ INDEXADA (en menos de 2 horas)"},
+{f:"the-lighthouse-zapopan (independiente)", t:"The Lighthouse Zapopan — repo aparte, con fotos, FAQ y captación", u:"https://rgarcia784-alt.github.io/lighthouse-zapopan/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/lighthouse-zapopan/main/index.html", tag:"indep", tagLabel:"INDEPENDIENTE", status:"ok", statusText:"✓ INDEXADA (en menos de 2 horas)"},
+{f:"blog-errores-renta-zapopan (Netlify)", t:"5 errores comunes al rentar — blog migrado a Netlify, con captación", u:"https://blog-errores-renta-zapopan.netlify.app/", dl:"", tag:"prueba", tagLabel:"PRUEBA INDEXACIÓN", status:"pending", statusText:"◐ Verificada en Search Console — pendiente confirmar carga y solicitar indexación"},
+{f:"index.html", t:"Cómo comprar o vender sin caer en fraude — repo independiente, con captación", u:"https://rgarcia784-alt.github.io/blog-fraudes-compraventa/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/blog-fraudes-compraventa/main/index.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"proceso-desarrollo-inmobiliario-jalisco (Netlify)", t:"Proceso de Desarrollo Inmobiliario en Jalisco — Vertical, Fraccionamiento y Lotificación", u:"https://proceso-desarrollo-jalisco.netlify.app/", dl:"", tag:"prueba", tagLabel:"PRUEBA INDEXACIÓN", status:"pending", statusText:"◐ Publicada — pendiente verificar en Search Console y solicitar indexación"},
+{f:"index.html", t:"Renta o Vende tu Local Comercial (Locales Comerciales GDL)", u:"https://rgarcia784-alt.github.io/locales-comerciales-gdl/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/locales-comerciales-gdl/main/index.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"index.html", t:"Plaza Norte — Locales Comerciales en Renta, Zapopan", u:"https://rgarcia784-alt.github.io/Locales-comerciales-en-renta-Plaza-Norte-Capital-Norte-Zapopan/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/Locales-comerciales-en-renta-Plaza-Norte-Capital-Norte-Zapopan/main/index.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"propiedades-en-venta-renta-guadalajara-zapopan.html", t:"Bolsa Inmobiliaria — Buscador de Propiedades entre Asesores", u:"https://rgarcia784-alt.github.io/bolsa-inmobiliaria-gdl/propiedades-en-venta-renta-guadalajara-zapopan.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/bolsa-inmobiliaria-gdl/main/propiedades-en-venta-renta-guadalajara-zapopan.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"bolsainmobiliaria-publica.html", t:"Bolsa Inmobiliaria — Publica tu Propiedad (Brokers)", u:"https://rgarcia784-alt.github.io/bolsa-inmobiliaria-gdl/bolsainmobiliaria-publica.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/bolsa-inmobiliaria-gdl/main/bolsainmobiliaria-publica.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"index.html", t:"Liz Cárdenas — Century 21 Continental, Guadalajara", u:"https://rgarcia784-alt.github.io/century21-liz-cardenas/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/century21-liz-cardenas/main/index.html", tag:"otramarca", tagLabel:"OTRA MARCA / AGENTE"},
+{f:"index.html", t:"Sheló NABEL Guadalajara — Distribuidor / Empresario", u:"https://rgarcia784-alt.github.io/shelo-nabel-gdl/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/shelo-nabel-gdl/main/index.html", tag:"otramarca", tagLabel:"OTRO NEGOCIO"},
+{f:"investigacion-inquilinos-zapopan.html", t:"Investigación de Inquilinos Zapopan — Buró de Crédito y antecedentes", u:"https://rgarcia784-alt.github.io/investigacion-inquilinos-zapopan/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/investigacion-inquilinos-zapopan/main/index.html", tag:"indep", tagLabel:"INDEPENDIENTE", status:"ok", statusText:"✓ INDEXADA"},
+{f:"renta-propiedades-zapopan.html", t:"Renta tu Casa o Departamento en Zapopan sin Complicaciones", u:"https://rgarcia784-alt.github.io/renta-propiedades-zapopan/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/renta-propiedades-zapopan/main/index.html", tag:"indep", tagLabel:"INDEPENDIENTE", status:"ok", statusText:"✓ INDEXADA"},
+{f:"index.html", t:"NARA Américas — Espacio de Herramientas (Cotizador, Portal, Tarjeta)", u:"https://rgarcia784-alt.github.io/nara-americas-tools/", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/index.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"cotizador-nara-americas.html", t:"NARA Américas — Cotizador de Unidades", u:"https://rgarcia784-alt.github.io/nara-americas-tools/cotizador-nara-americas.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/cotizador-nara-americas.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"portal-nara-americas.html", t:"NARA Américas — Portal de Asesores", u:"https://rgarcia784-alt.github.io/nara-americas-tools/portal-nara-americas.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/portal-nara-americas.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"nara-americas.html", t:"NARA Américas — Departamentos en Preventa, Zapopan", u:"https://rgarcia784-alt.github.io/nara-americas-tools/nara-americas.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/nara-americas.html", tag:"landing", tagLabel:"LANDING DE VENTAS"},
+{f:"tarjeta-nara-americas.html", t:"NARA Américas — Tarjeta Digital de Asesor", u:"https://rgarcia784-alt.github.io/nara-americas-tools/tarjeta-nara-americas.html", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/tarjeta-nara-americas.html", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE"},
+{f:"NARA_Americas_Lista_de_Precios.pdf", t:"NARA Américas — Lista de Precios (34 unidades, recámaras, baños y plan de pagos)", u:"https://rgarcia784-alt.github.io/nara-americas-tools/NARA_Americas_Lista_de_Precios.pdf", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/NARA_Americas_Lista_de_Precios.pdf", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE", status:"ok", statusText:"✓ Publicado y enlazado desde landing y cotizador"},
+{f:"NARA_Americas_Brochure.pdf", t:"NARA Américas — Brochure comercial", u:"https://rgarcia784-alt.github.io/nara-americas-tools/NARA_Americas_Brochure.pdf", dl:"https://raw.githubusercontent.com/rgarcia784-alt/nara-americas-tools/main/NARA_Americas_Brochure.pdf", tag:"indep", tagLabel:"DOMINIO INDEPENDIENTE", status:"ok", statusText:"✓ Publicado y enlazado desde landing y cotizador"},
+{f:"index.html", t:"Arq. Eduardo Espinosa Heredia — Dirección de Obra y Diseño Arquitectónico", u:"https://arq-eduardo-espinosa.netlify.app/", dl:"", tag:"otramarca", tagLabel:"OTRA MARCA / AGENTE"},
+{f:"CRM interno", t:"CRM UNO Brokers — Requerimientos, Arrendatarios, Prospectos, Compradores y Calendario", u:"https://rafa-crm-unobrokers.web.app/", dl:"", status:"pending", statusText:"◐ Uso interno — no indexar"},
+];
+
+function render(list) {
+  const cont = document.getElementById('lista');
+  cont.innerHTML = '';
+  if (list.length === 0) {
+    cont.innerHTML = '<p style="text-align:center;color:#6b7280;">No se encontraron páginas con ese término.</p>';
+    return;
+  }
+  list.forEach(it => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    const tagHtml = it.tag ? `<span class="tag ${it.tag}">${it.tagLabel}</span>` : '';
+    const statusHtml = it.status === 'ok' ? `<span class="status-ok">${it.statusText}</span>`
+      : it.status === 'redirect' ? `<span class="status-redirect">${it.statusText}</span>`
+      : it.status === 'pending' ? `<span class="status-pending">${it.statusText}</span>` : '';
+    div.innerHTML = `
+      <div>
+        <div class="fname">${it.f} ${tagHtml} ${statusHtml}</div>
+        <div class="title">${it.t}</div>
+      </div>
+      <div class="buttons">
+        <a class="btn-open" href="${it.u}" target="_blank">Abrir ↗</a>
+        <button class="btn-copy" data-url="${it.u}">Copiar link</button>
+        <a class="btn-dl" href="${it.dl}" target="_blank" download>Descargar HTML</a>
+      </div>`;
+    cont.appendChild(div);
+  });
+  document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.url).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Copiado';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+}
+
+function filtrar() {
+  const q = document.getElementById('buscador').value.toLowerCase();
+  const filtered = items.filter(it => it.f.toLowerCase().includes(q) || it.t.toLowerCase().includes(q));
+  render(filtered);
+}
+
+render(items);
+</script>
+</body>
+</html>

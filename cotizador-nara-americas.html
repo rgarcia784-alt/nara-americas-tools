@@ -248,7 +248,7 @@
 
       <div class="roi-section" id="roiSection" style="display:none;">
         <p class="roi-title">Rendimiento de inversión</p>
-        <p class="roi-sub">Estimado sobre el precio de contado de esta unidad</p>
+        <p class="roi-sub">Renta tradicional sobre precio de lista · estancias cortas sobre precio de contado</p>
         <div class="roi-grid">
           <div class="roi-item"><div class="rv" id="roiPrecioContado">—</div><div class="rl">Precio de contado (8% dto.)</div></div>
           <div class="roi-item"><div class="rv" id="roiRentaSin">—</div><div class="rl">Renta mensual sin muebles (ref.)</div></div>
@@ -259,7 +259,7 @@
           <div class="roi-item"><div class="rv" id="roiOcupacion">—</div><div class="rl">Ocupación estimada, estancias cortas</div></div>
           <div class="roi-item"><div class="rv" id="roiRendCorta">—</div><div class="rl">Rendimiento renta corta estancia</div></div>
         </div>
-        <p class="roi-note">Rendimiento tradicional estimado al momento de entrega (18 meses): 6% anual mínimo sin muebles y 7.5% anual amueblado, sobre el precio de contado; renta mensual implícita a esas tasas. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
+        <p class="roi-note">Rendimiento tradicional estimado al momento de entrega (18 meses): 6% anual mínimo sin muebles y 7.5% anual amueblado, sobre el precio de lista; renta mensual implícita a esas tasas. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
       </div>
     </div>
 
@@ -294,7 +294,7 @@
 
         <div id="qRoiSection" style="display:none; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);">
           <p style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;">Rendimiento de inversión estimado</p>
-          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Sobre el precio de contado de esta unidad</p>
+          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Renta tradicional sobre precio de lista · estancias cortas sobre precio de contado</p>
           <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiPrecioContado">—</div>
@@ -329,7 +329,7 @@
               <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento estancia corta</div>
             </div>
           </div>
-          <p style="font-size:10px; color:#8FA1BD; margin-top:12px; line-height:1.4;">Rendimiento tradicional estimado al momento de entrega (18 meses): 6% anual mínimo sin muebles y 7.5% anual amueblado, sobre el precio de contado; renta mensual implícita a esas tasas. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
+          <p style="font-size:10px; color:#8FA1BD; margin-top:12px; line-height:1.4;">Rendimiento tradicional estimado al momento de entrega (18 meses): 6% anual mínimo sin muebles y 7.5% anual amueblado, sobre el precio de lista; renta mensual implícita a esas tasas. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
         </div>
 
         <div class="quote-foot">
@@ -502,9 +502,9 @@ function updateQuote(){
   const roiSection = document.getElementById('roiSection');
   if (TIPOS_CON_ROI.includes(selected.tipo)) {
     const rendTradSin = RENDIMIENTO_TRAD_SIN_MUEBLES;
-    const rentaSin = (precioContado * RENDIMIENTO_TRAD_SIN_MUEBLES / 100) / 12;
+    const rentaSin = (total * RENDIMIENTO_TRAD_SIN_MUEBLES / 100) / 12;
     const rendTradAmu = RENDIMIENTO_TRAD_AMUEBLADO;
-    const rentaAmu = (precioContado * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
+    const rentaAmu = (total * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
     const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
     const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
     const rendCorta = (ingresoAirbnbMensual * 12 / precioContado) * 100;
@@ -560,9 +560,9 @@ function renderQuoteCard(total){
   if (TIPOS_CON_ROI.includes(selected.tipo)) {
     const precioContado = total * (1 - DESCUENTO_CONTADO / 100);
     const rendTradSin = RENDIMIENTO_TRAD_SIN_MUEBLES;
-    const rentaSin = (precioContado * RENDIMIENTO_TRAD_SIN_MUEBLES / 100) / 12;
+    const rentaSin = (total * RENDIMIENTO_TRAD_SIN_MUEBLES / 100) / 12;
     const rendTradAmu = RENDIMIENTO_TRAD_AMUEBLADO;
-    const rentaAmu = (precioContado * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
+    const rentaAmu = (total * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
     const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
     const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
     const rendCorta = (ingresoAirbnbMensual * 12 / precioContado) * 100;

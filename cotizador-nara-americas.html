@@ -104,7 +104,7 @@
   }
   .roi-title{ font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;}
   .roi-sub{ font-size:12px; color:#B8C4D6; margin:0 0 16px;}
-  .roi-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;}
+  .roi-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
   .roi-item{
     background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px;
     padding:14px 8px; text-align:center;
@@ -248,18 +248,16 @@
 
       <div class="roi-section" id="roiSection" style="display:none;">
         <p class="roi-title">Rendimiento de inversión</p>
-        <p class="roi-sub">Renta tradicional sobre precio de lista · estancias cortas sobre precio de contado</p>
+        <p class="roi-sub">Estimado sobre el precio de lista: <span id="roiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span> · Precio de contado (8% dto.): <span id="roiPrecioContado" style="color:var(--gold); font-weight:bold;">—</span></p>
         <div class="roi-grid">
-          <div class="roi-item"><div class="rv" id="roiPrecioContado">—</div><div class="rl">Precio de contado (8% dto.)</div></div>
-          <div class="roi-item"><div class="rv" id="roiRentaSin">—</div><div class="rl">Renta mensual sin muebles (ref.)</div></div>
-          <div class="roi-item"><div class="rv" id="roiRendTradSin">—</div><div class="rl">Rendimiento tradicional sin muebles</div></div>
-          <div class="roi-item"><div class="rv" id="roiRentaAmu">—</div><div class="rl">Renta mensual amueblada (ref.)</div></div>
-          <div class="roi-item"><div class="rv" id="roiRendTradAmu">—</div><div class="rl">Rendimiento tradicional amueblado</div></div>
-          <div class="roi-item"><div class="rv" id="roiAirbnbNoche">—</div><div class="rl">Tarifa Airbnb por noche (ref.)</div></div>
-          <div class="roi-item"><div class="rv" id="roiOcupacion">—</div><div class="rl">Ocupación estimada, estancias cortas</div></div>
-          <div class="roi-item"><div class="rv" id="roiRendCorta">—</div><div class="rl">Rendimiento renta corta estancia</div></div>
+          <div class="roi-item"><div class="rv" id="roiRentaSin">—</div><div class="rl"><b>SIN MUEBLES</b><br>Renta mensual (ref.)</div></div>
+          <div class="roi-item"><div class="rv" id="roiRentaAmu">—</div><div class="rl"><b>AMUEBLADO</b><br>Renta mensual (ref.)</div></div>
+          <div class="roi-item"><div class="rv" id="roiRentaAnualCorta">—</div><div class="rl"><b>ESTANCIAS CORTAS</b><br>Renta anual (ref.)</div></div>
+          <div class="roi-item"><div class="rv" id="roiRendTradSin">—</div><div class="rl">Rendimiento anual</div></div>
+          <div class="roi-item"><div class="rv" id="roiRendTradAmu">—</div><div class="rl">Rendimiento anual</div></div>
+          <div class="roi-item"><div class="rv" id="roiRendCorta">—</div><div class="rl">Rendimiento anual</div></div>
         </div>
-        <p class="roi-note">Rendimiento tradicional estimado al momento de entrega (18 meses): 6% anual mínimo sin muebles y 7.5% anual amueblado, sobre el precio de lista; renta mensual implícita a esas tasas. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
+        <p class="roi-note">Rendimiento estimado al momento de entrega (18 meses), sobre el precio de lista: 6% anual mínimo sin muebles y 7.5% anual amueblado. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación estimada. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
       </div>
     </div>
 
@@ -294,42 +292,34 @@
 
         <div id="qRoiSection" style="display:none; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);">
           <p style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;">Rendimiento de inversión estimado</p>
-          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Renta tradicional sobre precio de lista · estancias cortas sobre precio de contado</p>
-          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
-              <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiPrecioContado">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Precio de contado</div>
-            </div>
+          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Estimado sobre el precio de lista: <span id="qRoiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span> · Precio de contado (8% dto.): <span id="qRoiPrecioContado" style="color:var(--gold); font-weight:bold;">—</span></p>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRentaSin">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Renta sin muebles (ref.)</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
-              <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRendTradSin">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento sin muebles</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>SIN MUEBLES</b><br>Renta mensual (ref.)</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRentaAmu">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Renta amueblada (ref.)</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>AMUEBLADO</b><br>Renta mensual (ref.)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRentaAnualCorta">—</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>ESTANCIAS CORTAS</b><br>Renta anual (ref.)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRendTradSin">—</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento anual</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRendTradAmu">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento amueblado</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
-              <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiAirbnbNoche">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Tarifa Airbnb/noche (ref.)</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
-              <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiOcupacion">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Ocupación estancias cortas</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento anual</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRendCorta">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento estancia corta</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento anual</div>
             </div>
           </div>
-          <p style="font-size:10px; color:#8FA1BD; margin-top:12px; line-height:1.4;">Rendimiento tradicional estimado al momento de entrega (18 meses): 6% anual mínimo sin muebles y 7.5% anual amueblado, sobre el precio de lista; renta mensual implícita a esas tasas. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
+          <p style="font-size:10px; color:#8FA1BD; margin-top:12px; line-height:1.4;">Rendimiento estimado al momento de entrega (18 meses), sobre el precio de lista: 6% anual mínimo sin muebles y 7.5% anual amueblado. Estancias cortas con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación estimada. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
         </div>
 
         <div class="quote-foot">
@@ -507,15 +497,16 @@ function updateQuote(){
     const rentaAmu = (total * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
     const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
     const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
-    const rendCorta = (ingresoAirbnbMensual * 12 / precioContado) * 100;
+    const rentaAnualCorta = ingresoAirbnbMensual * 12;
+    const rendCorta = (rentaAnualCorta / total) * 100;
 
+    document.getElementById('roiPrecioLista').textContent = fmt(total);
     document.getElementById('roiPrecioContado').textContent = fmt(precioContado);
     document.getElementById('roiRentaSin').textContent = fmt(rentaSin);
     document.getElementById('roiRendTradSin').textContent = rendTradSin.toFixed(1) + '%';
     document.getElementById('roiRentaAmu').textContent = fmt(rentaAmu);
     document.getElementById('roiRendTradAmu').textContent = rendTradAmu.toFixed(1) + '%';
-    document.getElementById('roiAirbnbNoche').textContent = fmt(airbnbNoche);
-    document.getElementById('roiOcupacion').textContent = Math.round(OCUPACION_ESTANCIA_CORTA * 100) + '%';
+    document.getElementById('roiRentaAnualCorta').textContent = fmt(rentaAnualCorta);
     document.getElementById('roiRendCorta').textContent = rendCorta.toFixed(1) + '%';
     roiSection.style.display = 'block';
   } else {
@@ -565,15 +556,16 @@ function renderQuoteCard(total){
     const rentaAmu = (total * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
     const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
     const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
-    const rendCorta = (ingresoAirbnbMensual * 12 / precioContado) * 100;
+    const rentaAnualCorta = ingresoAirbnbMensual * 12;
+    const rendCorta = (rentaAnualCorta / total) * 100;
 
+    document.getElementById('qRoiPrecioLista').textContent = fmt(total);
     document.getElementById('qRoiPrecioContado').textContent = fmt(precioContado);
     document.getElementById('qRoiRentaSin').textContent = fmt(rentaSin);
     document.getElementById('qRoiRendTradSin').textContent = rendTradSin.toFixed(1) + '%';
     document.getElementById('qRoiRentaAmu').textContent = fmt(rentaAmu);
     document.getElementById('qRoiRendTradAmu').textContent = rendTradAmu.toFixed(1) + '%';
-    document.getElementById('qRoiAirbnbNoche').textContent = fmt(airbnbNoche);
-    document.getElementById('qRoiOcupacion').textContent = Math.round(OCUPACION_ESTANCIA_CORTA * 100) + '%';
+    document.getElementById('qRoiRentaAnualCorta').textContent = fmt(rentaAnualCorta);
     document.getElementById('qRoiRendCorta').textContent = rendCorta.toFixed(1) + '%';
     qRoiSection.style.display = 'block';
   } else {

@@ -248,10 +248,10 @@
 
       <div class="roi-section" id="roiSection" style="display:none;">
         <p class="roi-title">Rendimiento de inversión</p>
-        <p class="roi-sub">Estimado sobre el precio de lista: <span id="roiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span> · Precio de contado (8% dto.): <span id="roiPrecioContado" style="color:var(--gold); font-weight:bold;">—</span></p>
+        <p class="roi-sub">Estimado sobre el precio de lista: <span id="roiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span></p>
         <div class="roi-grid">
-          <div class="roi-item"><div class="rv" id="roiRentaSin">—</div><div class="rl"><b>SIN MUEBLES</b><br>Renta mensual (ref.)</div></div>
-          <div class="roi-item"><div class="rv" id="roiRentaAmu">—</div><div class="rl"><b>AMUEBLADO</b><br>Renta mensual (ref.)</div></div>
+          <div class="roi-item"><div class="rv" id="roiRentaSin">—</div><div class="rl"><b>SIN MUEBLES</b><br>Renta anual (ref.)</div></div>
+          <div class="roi-item"><div class="rv" id="roiRentaAmu">—</div><div class="rl"><b>AMUEBLADO</b><br>Renta anual (ref.)</div></div>
           <div class="roi-item"><div class="rv" id="roiRentaAnualCorta">—</div><div class="rl"><b>ESTANCIAS CORTAS</b><br>Renta anual (ref.)</div></div>
           <div class="roi-item"><div class="rv" id="roiRendTradSin">—</div><div class="rl">Rendimiento anual</div></div>
           <div class="roi-item"><div class="rv" id="roiRendTradAmu">—</div><div class="rl">Rendimiento anual</div></div>
@@ -292,15 +292,15 @@
 
         <div id="qRoiSection" style="display:none; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);">
           <p style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;">Rendimiento de inversión estimado</p>
-          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Estimado sobre el precio de lista: <span id="qRoiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span> · Precio de contado (8% dto.): <span id="qRoiPrecioContado" style="color:var(--gold); font-weight:bold;">—</span></p>
+          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Estimado sobre el precio de lista: <span id="qRoiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span></p>
           <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRentaSin">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>SIN MUEBLES</b><br>Renta mensual (ref.)</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>SIN MUEBLES</b><br>Renta anual (ref.)</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRentaAmu">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>AMUEBLADO</b><br>Renta mensual (ref.)</div>
+              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>AMUEBLADO</b><br>Renta anual (ref.)</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRentaAnualCorta">—</div>
@@ -492,16 +492,15 @@ function updateQuote(){
   const roiSection = document.getElementById('roiSection');
   if (TIPOS_CON_ROI.includes(selected.tipo)) {
     const rendTradSin = RENDIMIENTO_TRAD_SIN_MUEBLES;
-    const rentaSin = (total * RENDIMIENTO_TRAD_SIN_MUEBLES / 100) / 12;
+    const rentaSin = total * RENDIMIENTO_TRAD_SIN_MUEBLES / 100;
     const rendTradAmu = RENDIMIENTO_TRAD_AMUEBLADO;
-    const rentaAmu = (total * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
+    const rentaAmu = total * RENDIMIENTO_TRAD_AMUEBLADO / 100;
     const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
     const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
     const rentaAnualCorta = ingresoAirbnbMensual * 12;
     const rendCorta = (rentaAnualCorta / total) * 100;
 
     document.getElementById('roiPrecioLista').textContent = fmt(total);
-    document.getElementById('roiPrecioContado').textContent = fmt(precioContado);
     document.getElementById('roiRentaSin').textContent = fmt(rentaSin);
     document.getElementById('roiRendTradSin').textContent = rendTradSin.toFixed(1) + '%';
     document.getElementById('roiRentaAmu').textContent = fmt(rentaAmu);
@@ -551,16 +550,15 @@ function renderQuoteCard(total){
   if (TIPOS_CON_ROI.includes(selected.tipo)) {
     const precioContado = total * (1 - DESCUENTO_CONTADO / 100);
     const rendTradSin = RENDIMIENTO_TRAD_SIN_MUEBLES;
-    const rentaSin = (total * RENDIMIENTO_TRAD_SIN_MUEBLES / 100) / 12;
+    const rentaSin = total * RENDIMIENTO_TRAD_SIN_MUEBLES / 100;
     const rendTradAmu = RENDIMIENTO_TRAD_AMUEBLADO;
-    const rentaAmu = (total * RENDIMIENTO_TRAD_AMUEBLADO / 100) / 12;
+    const rentaAmu = total * RENDIMIENTO_TRAD_AMUEBLADO / 100;
     const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
     const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
     const rentaAnualCorta = ingresoAirbnbMensual * 12;
     const rendCorta = (rentaAnualCorta / total) * 100;
 
     document.getElementById('qRoiPrecioLista').textContent = fmt(total);
-    document.getElementById('qRoiPrecioContado').textContent = fmt(precioContado);
     document.getElementById('qRoiRentaSin').textContent = fmt(rentaSin);
     document.getElementById('qRoiRendTradSin').textContent = rendTradSin.toFixed(1) + '%';
     document.getElementById('qRoiRentaAmu').textContent = fmt(rentaAmu);

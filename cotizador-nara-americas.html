@@ -153,6 +153,7 @@
   .placeholder{ color:#8FA1BD; text-align:center; padding:40px 10px; font-size:14px;}
 
   @media print{
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
     header, .step:not(#quoteStep), .actions, .filters{ display:none !important;}
     #quoteStep h2, #noSelection, #paymentBlock{ display:none !important;}
     body{ background:#fff; margin:0;}

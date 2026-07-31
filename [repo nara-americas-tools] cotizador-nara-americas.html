@@ -227,9 +227,7 @@
           <div class="pay-plan-label">Durante la obra</div>
           <div class="pay-plan-amount" id="amtConstruccion">—</div>
           <div class="pay-plan-months">
-            <label for="mesesConstruccion">en</label>
-            <input type="number" id="mesesConstruccion" value="24" min="1" max="60">
-            <label for="mesesConstruccion">meses</label>
+            <span>en 24 meses</span>
           </div>
           <div class="pay-plan-monthly" id="amtMensualidad">— / mes</div>
         </div>
@@ -290,6 +288,39 @@
         <div class="total-line" style="font-size:13px; color:#B8C4D6; font-weight:normal;">
           <span>Precio de contado (8% dto.)</span><span id="qContado">—</span>
         </div>
+
+        <div id="qRoiSection" style="display:none; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);">
+          <p style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;">Rendimiento de inversión estimado</p>
+          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Sobre el precio de contado de esta unidad</p>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:15px; font-weight:bold; color:var(--gold);" id="qRoiPrecioContado">—</div>
+              <div style="font-size:9.5px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Precio de contado</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:15px; font-weight:bold; color:var(--gold);" id="qRoiRentaMensual">—</div>
+              <div style="font-size:9.5px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Renta mensual estimada</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:15px; font-weight:bold; color:var(--gold);" id="qRoiRendTrad">—</div>
+              <div style="font-size:9.5px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento renta tradicional</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:15px; font-weight:bold; color:var(--gold);" id="qRoiAirbnbNoche">—</div>
+              <div style="font-size:9.5px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Tarifa Airbnb por noche (ref.)</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:15px; font-weight:bold; color:var(--gold);" id="qRoiOcupacion">—</div>
+              <div style="font-size:9.5px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Ocupación estimada, estancias cortas</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+              <div style="font-size:15px; font-weight:bold; color:var(--gold);" id="qRoiRendCorta">—</div>
+              <div style="font-size:9.5px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento renta corta estancia</div>
+            </div>
+          </div>
+          <p style="font-size:10px; color:#8FA1BD; margin-top:12px; line-height:1.4;">Estimado con $437.5/m² de renta mensual y $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026), 55% de ocupación en estancias cortas. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
+        </div>
+
         <div class="quote-foot">
           Los precios son en moneda nacional (MXN). Esta cotización tiene vigencia
           de 30 días naturales a partir de la fecha de emisión. Precios y disponibilidad sujetos a cambio sin
@@ -435,6 +466,7 @@ function selectUnit(u){
 }
 
 const PAY_PCT = { enganche: 20, construccion: 60, entrega: 20 };
+const MESES_CONSTRUCCION = 24; // plazo fijo, sin opción de elegir
 const DESCUENTO_CONTADO = 8; // % de descuento por pago de contado
 const RENTA_MXN_M2 = 437.5;        // renta mensual amueblada, referencia $/m² (unidad 705-E, 40 m² = $17,500/mes)
 const AIRBNB_MXN_NOCHE_M2 = 32.5;  // tarifa Airbnb, referencia $/m²/noche (unidad 705-E, 40 m² = $1,300/noche)
@@ -444,7 +476,7 @@ const TIPOS_CON_ROI = ['Departamento', 'Sky Loft'];
 function updateQuote(){
   if (!selected) return;
   const total = selected.precio;
-  const meses = Math.max(1, parseInt(document.getElementById('mesesConstruccion').value) || 1);
+  const meses = MESES_CONSTRUCCION;
   const montoConstruccion = total * PAY_PCT.construccion / 100;
   const mensualidad = montoConstruccion / meses;
   const precioContado = total * (1 - DESCUENTO_CONTADO / 100);
@@ -495,7 +527,7 @@ function renderQuoteCard(total){
   document.getElementById('qTotal').textContent = fmt(total);
   document.getElementById('qContado').textContent = fmt(total * (1 - DESCUENTO_CONTADO / 100));
 
-  const meses = Math.max(1, parseInt(document.getElementById('mesesConstruccion').value) || 1);
+  const meses = MESES_CONSTRUCCION;
   const montoConstruccion = total * PAY_PCT.construccion / 100;
   const mensualidad = montoConstruccion / meses;
 
@@ -507,6 +539,26 @@ function renderQuoteCard(total){
   document.getElementById('qPayBody').innerHTML = rows.map(r =>
     `<tr><td>${r[0]}${r[3] ? `<div style="font-size:12px; color:var(--gold); font-weight:bold; margin-top:3px;">${r[3]}</div>` : ''}</td><td>${r[1]}%</td><td style="text-align:right;">${fmt(r[2])}</td></tr>`
   ).join('');
+
+  const qRoiSection = document.getElementById('qRoiSection');
+  if (TIPOS_CON_ROI.includes(selected.tipo)) {
+    const precioContado = total * (1 - DESCUENTO_CONTADO / 100);
+    const rentaMensual = selected.m2 * RENTA_MXN_M2;
+    const rendTrad = (rentaMensual * 12 / precioContado) * 100;
+    const airbnbNoche = selected.m2 * AIRBNB_MXN_NOCHE_M2;
+    const ingresoAirbnbMensual = airbnbNoche * 30 * OCUPACION_ESTANCIA_CORTA;
+    const rendCorta = (ingresoAirbnbMensual * 12 / precioContado) * 100;
+
+    document.getElementById('qRoiPrecioContado').textContent = fmt(precioContado);
+    document.getElementById('qRoiRentaMensual').textContent = fmt(rentaMensual);
+    document.getElementById('qRoiRendTrad').textContent = rendTrad.toFixed(1) + '%';
+    document.getElementById('qRoiAirbnbNoche').textContent = fmt(airbnbNoche);
+    document.getElementById('qRoiOcupacion').textContent = Math.round(OCUPACION_ESTANCIA_CORTA * 100) + '%';
+    document.getElementById('qRoiRendCorta').textContent = rendCorta.toFixed(1) + '%';
+    qRoiSection.style.display = 'block';
+  } else {
+    qRoiSection.style.display = 'none';
+  }
 }
 
 function shareWhatsApp(){
@@ -518,7 +570,7 @@ function shareWhatsApp(){
   window.open(url, '_blank');
 }
 
-['mesesConstruccion','advName','cliName'].forEach(id => {
+['advName','cliName'].forEach(id => {
   document.getElementById(id).addEventListener('input', updateQuote);
 });
 

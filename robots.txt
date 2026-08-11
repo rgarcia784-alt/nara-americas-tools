@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rgarcia784-alt.github.io/nara-americas-tools/sitemap.xml

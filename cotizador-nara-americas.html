@@ -8,6 +8,7 @@
 <style>
   :root{
     --navy:#0A1F44;
+    --navy-light:#1E3E6B;
     --navy-deep:#071731;
     --bluegray:#3E5C76;
     --gold:#C49A28;
@@ -70,7 +71,7 @@
     background:var(--off); border-radius:10px; padding:18px 14px; text-align:center;
     display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
   }
-  .pay-plan-item-main{ background:var(--navy); color:#fff;}
+  .pay-plan-item-main{ background:var(--navy-light); color:#fff;}
   .pay-plan-pct{ font-size:28px; font-weight:bold; color:var(--navy);}
   .pay-plan-item-main .pay-plan-pct{ color:var(--gold); font-size:34px;}
   .pay-plan-label{ font-size:12px; color:var(--bluegray); text-transform:uppercase; letter-spacing:0.5px; margin:4px 0 10px;}
@@ -100,7 +101,7 @@
   .contado-box .cb-amount{ font-size:20px; font-weight:bold; color:var(--gold);}
 
   .roi-section{
-    margin-top:16px; background:var(--navy); border-radius:12px; padding:22px 20px; color:#fff;
+    margin-top:16px; background:var(--navy-light); border-radius:12px; padding:22px 20px; color:#fff;
   }
   .roi-title{ font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;}
   .roi-sub{ font-size:12px; color:#B8C4D6; margin:0 0 16px;}
@@ -119,7 +120,7 @@
   #quote{ display:none; }
   #quote.show{ display:block; }
   .quote-card{
-    background:var(--navy); color:#fff; border-radius:10px; padding:26px; margin-top:8px;
+    background:var(--navy-light); color:#fff; border-radius:10px; padding:26px; margin-top:8px;
   }
   .quote-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
   .quote-head .brand{ font-size:12px; letter-spacing:3px; color:var(--gold); font-weight:bold;}
@@ -453,6 +454,7 @@ function selectUnit(u){
   document.getElementById('noSelection').style.display = 'none';
   document.getElementById('paymentBlock').style.display = 'block';
   document.getElementById('actionButtons').style.display = 'flex';
+  document.title = `Cotizacion NARA Americas - Unidad ${u.clave}`;
   updateQuote();
 }
 
@@ -462,7 +464,7 @@ const DESCUENTO_CONTADO = 8; // % de descuento por pago de contado
 const RENDIMIENTO_TRAD_SIN_MUEBLES = 6;    // % anual mínimo, renta tradicional, al momento de entrega (18 meses)
 const AIRBNB_MXN_NOCHE_M2 = 32.5;  // tarifa Airbnb, referencia $/m²/noche (unidad 705-E, 40 m² = $1,300/noche)
 const OCUPACION_ESTANCIA_CORTA = 0.55; // 55%
-const TIPOS_CON_ROI = ['Departamento', 'Sky Loft'];
+const TIPOS_CON_ROI = ['Local', 'Oficina', 'Departamento', 'Sky Loft'];
 
 function updateQuote(){
   if (!selected) return;

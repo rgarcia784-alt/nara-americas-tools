@@ -71,20 +71,20 @@
     background:var(--off); border-radius:10px; padding:18px 14px; text-align:center;
     display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
   }
-  .pay-plan-item-main{ background:var(--navy-light); color:#fff;}
+  .pay-plan-item-main{ background:#fff; color:var(--ink); border:2px solid var(--gold);}
   .pay-plan-pct{ font-size:28px; font-weight:bold; color:var(--navy);}
   .pay-plan-item-main .pay-plan-pct{ color:var(--gold); font-size:34px;}
   .pay-plan-label{ font-size:12px; color:var(--bluegray); text-transform:uppercase; letter-spacing:0.5px; margin:4px 0 10px;}
-  .pay-plan-item-main .pay-plan-label{ color:#B8C4D6;}
+  .pay-plan-item-main .pay-plan-label{ color:var(--bluegray);}
   .pay-plan-amount{ font-size:16px; font-weight:bold; color:var(--navy);}
-  .pay-plan-item-main .pay-plan-amount{ color:#fff;}
-  .pay-plan-months{ display:flex; align-items:center; gap:6px; margin-top:12px; font-size:12px; color:#B8C4D6;}
+  .pay-plan-item-main .pay-plan-amount{ color:var(--navy);}
+  .pay-plan-months{ display:flex; align-items:center; gap:6px; margin-top:12px; font-size:12px; color:var(--bluegray);}
   .pay-plan-months input{
-    width:52px; text-align:center; padding:5px 4px; border-radius:5px; border:1px solid rgba(255,255,255,0.3);
-    background:rgba(255,255,255,0.08); color:#fff; font-family:inherit; font-size:13px;
+    width:52px; text-align:center; padding:5px 4px; border-radius:5px; border:1px solid #D7DCE3;
+    background:var(--off); color:var(--ink); font-family:inherit; font-size:13px;
   }
   .pay-plan-monthly{
-    margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.15);
+    margin-top:10px; padding-top:10px; border-top:1px solid #E4E7EC;
     font-size:19px; font-weight:bold; color:var(--gold); width:100%;
   }
   @media (max-width:600px){
@@ -101,18 +101,18 @@
   .contado-box .cb-amount{ font-size:20px; font-weight:bold; color:var(--gold);}
 
   .roi-section{
-    margin-top:16px; background:var(--navy-light); border-radius:12px; padding:22px 20px; color:#fff;
+    margin-top:16px; background:#fff; border:1px solid #E4E7EC; border-radius:12px; padding:22px 20px; color:var(--ink);
   }
   .roi-title{ font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;}
-  .roi-sub{ font-size:12px; color:#B8C4D6; margin:0 0 16px;}
+  .roi-sub{ font-size:12px; color:var(--bluegray); margin:0 0 16px;}
   .roi-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;}
   .roi-item{
-    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px;
+    background:var(--off); border:1px solid #E4E7EC; border-radius:8px;
     padding:14px 8px; text-align:center;
   }
   .roi-item .rv{ font-size:19px; font-weight:bold; color:var(--gold);}
-  .roi-item .rl{ font-size:10.5px; color:#C7D2E3; margin-top:4px; line-height:1.3;}
-  .roi-note{ font-size:11px; color:#8FA1BD; margin-top:14px; line-height:1.5;}
+  .roi-item .rl{ font-size:10.5px; color:var(--bluegray); margin-top:4px; line-height:1.3;}
+  .roi-note{ font-size:11px; color:var(--bluegray); margin-top:14px; line-height:1.5;}
   @media (max-width:600px){
     .roi-grid{ grid-template-columns:1fr 1fr;}
   }
@@ -120,20 +120,20 @@
   #quote{ display:none; }
   #quote.show{ display:block; }
   .quote-card{
-    background:var(--navy-light); color:#fff; border-radius:10px; padding:26px; margin-top:8px;
+    background:#fff; color:var(--ink); border:1px solid #E4E7EC; box-shadow:0 1px 6px rgba(0,0,0,0.06); border-radius:10px; padding:26px; margin-top:8px;
   }
   .quote-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
   .quote-head .brand{ font-size:12px; letter-spacing:3px; color:var(--gold); font-weight:bold;}
   .quote-head h3{ margin:4px 0 0; font-size:22px;}
-  .quote-meta{ font-size:12px; color:#B8C4D6; text-align:right;}
+  .quote-meta{ font-size:12px; color:var(--bluegray); text-align:right;}
   .quote-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; font-size:13px;}
-  .quote-grid div span{ display:block; color:#B8C4D6; font-size:11px; text-transform:uppercase; margin-bottom:2px;}
+  .quote-grid div span{ display:block; color:var(--bluegray); font-size:11px; text-transform:uppercase; margin-bottom:2px;}
 
   table.pay-table{ width:100%; margin-top:10px; font-size:13px;}
-  table.pay-table th{ color:#B8C4D6; border-bottom:1px solid rgba(255,255,255,0.2);}
-  table.pay-table td{ border-bottom:1px solid rgba(255,255,255,0.12); color:#fff;}
+  table.pay-table th{ color:var(--bluegray); border-bottom:1px solid #E4E7EC;}
+  table.pay-table td{ border-bottom:1px solid #EEF0F3; color:var(--ink);}
   .total-line{ display:flex; justify-content:space-between; font-size:16px; font-weight:bold; margin-top:14px; color:var(--gold);}
-  .quote-foot{ font-size:11px; color:#8FA1BD; margin-top:18px; line-height:1.5;}
+  .quote-foot{ font-size:11px; color:var(--bluegray); margin-top:18px; line-height:1.5;}
 
   .project-page{ margin-top:24px; background:#fff; border-radius:10px; padding:16px; box-shadow:0 1px 6px rgba(0,0,0,0.08);}
   .project-caption{ text-align:center; margin-top:12px;}
@@ -266,18 +266,18 @@
           <div>
             <div class="brand">NARA AMÉRICAS</div>
             <h3 id="qUnit">—</h3>
-            <div id="qDesc" style="color:#B8C4D6; font-size:13px;">—</div>
+            <div id="qDesc" style="color:var(--bluegray); font-size:13px;">—</div>
           </div>
           <div class="quote-meta">
             Cotización generada el<br><span id="qDate">—</span><br>Vigencia: 15 días naturales
           </div>
         </div>
-        <div id="qGreeting" style="font-size:14px; color:#fff; line-height:1.6; margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.15);">
+        <div id="qGreeting" style="font-size:14px; color:var(--ink); line-height:1.6; margin-bottom:18px; padding-bottom:16px; border-bottom:1px solid #E4E7EC;">
           —
         </div>
         <div class="quote-grid">
-          <div><span>Asesor</span><span id="qAdv" style="color:#fff; font-weight:bold;">—</span></div>
-          <div><span>Cliente</span><span id="qCli" style="color:#fff; font-weight:bold;">—</span></div>
+          <div><span>Asesor</span><span id="qAdv" style="color:var(--navy); font-weight:bold;">—</span></div>
+          <div><span>Cliente</span><span id="qCli" style="color:var(--navy); font-weight:bold;">—</span></div>
         </div>
 
         <table class="pay-table">
@@ -285,32 +285,32 @@
           <tbody id="qPayBody"></tbody>
         </table>
         <div class="total-line"><span>Precio total de la unidad</span><span id="qTotal">—</span></div>
-        <div class="total-line" style="font-size:13px; color:#B8C4D6; font-weight:normal;">
+        <div class="total-line" style="font-size:13px; color:var(--bluegray); font-weight:normal;">
           <span>Precio de contado (8% dto.)</span><span id="qContado">—</span>
         </div>
 
-        <div id="qRoiSection" style="display:none; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.15);">
+        <div id="qRoiSection" style="display:none; margin-top:18px; padding-top:16px; border-top:1px solid #E4E7EC;">
           <p style="font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); font-weight:bold; margin:0 0 3px;">Rendimiento de inversión estimado</p>
-          <p style="font-size:11px; color:#B8C4D6; margin:0 0 12px;">Estimado sobre el precio de lista: <span id="qRoiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span></p>
+          <p style="font-size:11px; color:var(--bluegray); margin:0 0 12px;">Estimado sobre el precio de lista: <span id="qRoiPrecioLista" style="color:var(--gold); font-weight:bold;">—</span></p>
           <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px;">
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+            <div style="background:var(--off); border:1px solid #E4E7EC; border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiPagoTrad">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>RENTA TRADICIONAL</b><br>Pago mensual estimado (ref.)</div>
+              <div style="font-size:9px; color:var(--bluegray); margin-top:3px; line-height:1.2;"><b>RENTA TRADICIONAL</b><br>Pago mensual estimado (ref.)</div>
             </div>
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+            <div style="background:var(--off); border:1px solid #E4E7EC; border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiPagoCorta">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;"><b>ESTANCIAS CORTAS</b><br>Amueblado · 55% ocupación (ref.)</div>
+              <div style="font-size:9px; color:var(--bluegray); margin-top:3px; line-height:1.2;"><b>ESTANCIAS CORTAS</b><br>Amueblado · 55% ocupación (ref.)</div>
             </div>
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+            <div style="background:var(--off); border:1px solid #E4E7EC; border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRendTrad">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento anual</div>
+              <div style="font-size:9px; color:var(--bluegray); margin-top:3px; line-height:1.2;">Rendimiento anual</div>
             </div>
-            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 6px; text-align:center;">
+            <div style="background:var(--off); border:1px solid #E4E7EC; border-radius:8px; padding:10px 6px; text-align:center;">
               <div style="font-size:14px; font-weight:bold; color:var(--gold);" id="qRoiRendCorta">—</div>
-              <div style="font-size:9px; color:#C7D2E3; margin-top:3px; line-height:1.2;">Rendimiento anual</div>
+              <div style="font-size:9px; color:var(--bluegray); margin-top:3px; line-height:1.2;">Rendimiento anual</div>
             </div>
           </div>
-          <p style="font-size:10px; color:#8FA1BD; margin-top:12px; line-height:1.4;">Rendimiento estimado al momento de entrega (18 meses), sobre el precio de lista. Renta tradicional (sin muebles): 6% anual mínimo. Estancias cortas (amueblado): con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación estimada. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
+          <p style="font-size:10px; color:var(--bluegray); margin-top:12px; line-height:1.4;">Rendimiento estimado al momento de entrega (18 meses), sobre el precio de lista. Renta tradicional (sin muebles): 6% anual mínimo. Estancias cortas (amueblado): con $32.5/m² de tarifa Airbnb (referencia de mercado, corredor Av. Américas / Plaza Patria, jul. 2026) y 55% de ocupación estimada. Rendimientos brutos; no incluyen gastos de operación, comisión de plataforma ni vacancia.</p>
         </div>
 
         <div class="quote-foot">
